@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QColorDialog, QPushButton, QMainWindow
 from PyQt5.QtGui import QColor
- 
+import pandas as pd
 
 # from SignalViewerApp import SignalViewerApp 
 
@@ -9,7 +9,12 @@ class Signal():
     def __init__(self):
         super().__init__()
         
-        self.signal_data = None
+        self.cvs_file_name = 'rec_1r.csv'
+        csvFile = pd.read_csv(self.cvs_file_name)   
+
+        self.signal_data_time = csvFile.iloc[:, 0].values
+        self.signal_data_amplitude = csvFile.iloc[:, 1].values
+        
         self.signal_type= None
         self.color= "blue" 
         self.speed=None
