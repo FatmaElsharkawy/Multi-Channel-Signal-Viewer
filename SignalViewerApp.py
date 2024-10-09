@@ -1,24 +1,23 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.QtCore import pyqtSlot
-from UI_file import MainWindow
-from ReportGenerator import  generate_pdf
+from MainWindowUI import Ui_signalViewer 
 
-class SignalViewerApp(QMainWindow):
+class SignalViewerApp():
     def __init__(self):
-        super().__init__()
         
+        #global ui_instance
         # Initialize the UI
-        self.ui = MainWindow()
-        self.ui.setupUi(self)
-        
+        # self.ui = MainWindow()
+        # self.ui.setupUi(self)
+        # ui_instance = self.ui 
         # Set the initial file paths as None
         self.file_path = None
         self.file_extension = None
 
         # Connect the button click event to the function
-        self.ui.upload_file.clicked.connect(self.browse_signals)
-        self.ui.export_pdf.clicked.connect(self.export_pdf)
+        # Ui_signalViewer.upload_file.clicked.connect(self.browse_signals)
+        # Ui_signalViewer.export_pdf.clicked.connect(self.export_pdf)
     
     @pyqtSlot()
     def browse_signals(self):
@@ -40,19 +39,19 @@ class SignalViewerApp(QMainWindow):
             # Proceed with further processing, e.g., load the file into memory
             QMessageBox.information(self, "File Uploaded", f"File uploaded successfully: {self.file_path}")
 
-    def export_pdf(self):
-        saved_file_path, _= QFileDialog.getSaveFileName(self, 'Export PDF', "", "PDF Files (*.pdf)")
+    # def export_pdf(self):
+    #     saved_file_path, _= QFileDialog.getSaveFileName(self, 'Export PDF', "", "PDF Files (*.pdf)")
         
-        if saved_file_path:
-            if not file_path.endswith(".pdf"):
-                file_path += ".pdf"
-            # Generate and save the PDF
-            generate_pdf(file_path)
+    #     if saved_file_path:
+    #         if not file_path.endswith(".pdf"):
+    #             file_path += ".pdf"
+    #         # Generate and save the PDF
+    #         generate_pdf(file_path)
     
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = SignalViewerApp()
+    app = QApplication([])
+    window = Ui_signalViewer()
     window.show()
     sys.exit(app.exec_())
