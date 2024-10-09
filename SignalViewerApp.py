@@ -1,7 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.QtCore import pyqtSlot
-from MainWindowUI import Ui_signalViewer 
 
 class SignalViewerApp():
     def __init__(self):
@@ -39,19 +38,19 @@ class SignalViewerApp():
             # Proceed with further processing, e.g., load the file into memory
             QMessageBox.information(self, "File Uploaded", f"File uploaded successfully: {self.file_path}")
 
-    # def export_pdf(self):
-    #     saved_file_path, _= QFileDialog.getSaveFileName(self, 'Export PDF', "", "PDF Files (*.pdf)")
+    def export_pdf(self):
+        saved_file_path, _= QFileDialog.getSaveFileName(self, 'Export PDF', "", "PDF Files (*.pdf)")
         
-    #     if saved_file_path:
-    #         if not file_path.endswith(".pdf"):
-    #             file_path += ".pdf"
-    #         # Generate and save the PDF
-    #         generate_pdf(file_path)
+        if saved_file_path:
+            if not file_path.endswith(".pdf"):
+                file_path += ".pdf"
+            # Generate and save the PDF
+            # generate_pdf(file_path)
     
 
 
-if __name__ == '__main__':
-    app = QApplication([])
-    window = Ui_signalViewer()
-    window.show()
-    sys.exit(app.exec_())
+# if __name__ == '__main__':
+#     app = QApplication([])
+#     window = Ui_signalViewer()
+#     window.show()
+#     sys.exit(app.exec_())
