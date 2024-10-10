@@ -15,6 +15,8 @@ class SignalViewerApp(QMainWindow):
         # Set the initial file paths as None
         self.file_path = None
         self.file_extension = None
+        self.real_time_signal= None
+
 
         # Connect the button click event to the function
         self.ui.upload_file.clicked.connect(self.browse_signals)
@@ -27,7 +29,7 @@ class SignalViewerApp(QMainWindow):
                                                          "Signal Files (*.edf *.csv *.hdf5)")
         if self.file_path:
             # Extract the file extension
-            self.file_extension = self.file_path.split('.')[-1].lower()
+            self.file_extension = self.file_path.split('.')[-3].lower()
             self.check_extension()
         else:
             QMessageBox.warning(self, "No file selected", "Please select a signal file to upload.")
@@ -49,6 +51,12 @@ class SignalViewerApp(QMainWindow):
             # Generate and save the PDF
             generate_pdf(file_path)
     
+    def get_signal_path(self):
+        return self.file_path
+
+    @staticmethod
+    def connect_website():
+        pass
 
 
 if __name__ == '__main__':
