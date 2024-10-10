@@ -1,7 +1,7 @@
+from model import Signal
 from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton
 from PyQt5.uic import loadUi
 import sys
-from Signal import Signal       
 class MainUI(QMainWindow):
     def __init__(self):
         super(MainUI, self).__init__()
