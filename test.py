@@ -1,30 +1,9 @@
-# import csv
-# with open('rec_1r.csv', mode ='r')as file:
-#   csvFile = csv.reader(file)
-#   for lines in csvFile:
-#         print(lines)
-
-# import csv
-# with open('rec_1r.csv', mode ='r') as file:    
-#        csvFile = csv.DictReader(file)
-#        for lines in csvFile:
-#             print(lines)
-
-
-# import pandas as pd
-# csvFile = pd.read_csv('rec_1r.csv')
-# first_column = csvFile.iloc[:, 0].values
-# second_column = csvFile.iloc[:, 1].values
-
-# # Print the arrays
-# print("First Column:", first_column)
-# print("Second Column:", second_column)
-# #print("Second Column:", type(second_column))
-
-
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy import interpolate
+import pyqtgraph as pg
+from pyqtgraph.Qt import QtWidgets, QtCore  # Ensure QtCore is imported
+import sys
+import matplotlib.pyplot as plt
 
 class SignalGlue:
     def __init__(self, signal_x, signal_y):
@@ -36,7 +15,6 @@ class SignalGlue:
         start_x, size_x = params.get("start_x"), params.get("size_x")
         start_y, size_y = params.get("start_y"), params.get("size_y")
         gap = params.get("gap", 0)
-        interpolation_order = params.get("interpolation_order", "linear")
 
         # Validate that start and size are not None
         if start_x is None or size_x is None or start_y is None or size_y is None:
@@ -49,90 +27,138 @@ class SignalGlue:
         part_x = self.signal_x[start_x:start_x + size_x]
         part_y = self.signal_y[start_y:start_y + size_y]
 
-        # Create a gap (positive distance) or overlap (negative distance)
-        if gap > 0:
-            estimated_gap = self.spline_interpolate(part_x, part_y, gap)
-            combined_signal = np.concatenate((part_x, estimated_gap, part_y))
-        else:
-            overlap_length = min(abs(gap), min(len(part_x), len(part_y)))
-            overlap_x = part_x[-overlap_length:]
-            overlap_y = part_y[:overlap_length]
-            interpolated_overlap = self.interpolate_signal(overlap_x, overlap_y, interpolation_order)
-
-            combined_signal = np.concatenate((part_x[:-overlap_length], interpolated_overlap, part_y[overlap_length:]))
+        # Create combined signal with the specified gap
+        combined_signal = np.concatenate((part_x, np.zeros(gap), part_y))
 
         return combined_signal
 
-    def interpolate_signal(self, signal_x, signal_y, method):
-        x = np.linspace(0, len(signal_x) - 1, len(signal_x))
+def open_combined_window(start_x, size_x, start_y, size_y, gap):
+    combined_window = QtWidgets.QWidget()
+    combined_layout = QtWidgets.QVBoxLayout()
 
-        # Perform interpolation
-        interpolator = interpolate.interp1d(x, signal_y, kind=method, fill_value="extrapolate")
-        interpolated_signal = interpolator(x)
+    # Create the plot for the combined signals
+    plot_widget = pg.PlotWidget(title="Combined Signals")
+    plot_widget.setXRange(0, (size_x + gap + size_y), padding=0)  # Set x range based on sizes and gap
+    plot_widget.setYRange(-1.5, 1.5, padding=0)  # Set y range
 
-        combined_signal = (signal_x + interpolated_signal) / 2
+    # Create the combined signal
+    glue_params = {
+        "start_x": start_x,
+        "size_x": size_x,
+        "start_y": start_y,
+        "size_y": size_y,
+        "gap": gap,
+    }
+    combined_signal = glue.glue_signals(glue_params)
 
-        return combined_signal
-    
-    def spline_interpolate(self, part_x, part_y, gap):
-        # Create new x positions for the gap
-        gap_x = np.linspace(0, gap + len(part_x) - 1, gap)
-        
-        # Combine the known signals
-        combined_x = np.concatenate((part_x, part_y))
-        combined_y = np.concatenate((part_x[-1:], part_y[:1]))  # Use the last of part_x and first of part_y
+    # Plot the combined signal
+    plot_widget.plot(combined_signal, pen='purple', name='Combined Signal')
 
-        # Create spline interpolator
-        spline = interpolate.CubicSpline(np.arange(len(combined_x)), combined_x)
-        
-        # Interpolate the gap
-        gap_signal = spline(np.arange(len(part_x), len(part_x) + gap))
-        
-        return gap_signal
+    # Add button to plot the combined signal
+    combined_layout.addWidget(plot_widget)
+    combined_window.setLayout(combined_layout)
+    combined_window.setWindowTitle("Combined Signals")
+    combined_window.resize(800, 600)
+    combined_window.show()
 
-# Test SignalGlue
+    # Ensure the window stays open until closed by the user
+    combined_window.setAttribute(QtWidgets.Qt.WA_QuitOnClose, False)
+
+    # Store a reference to the combined window to keep it open
+    app.combined_window = combined_window
+
+    return combined_window  # Return the window reference
+
+# PyQt application setup
+app = QtWidgets.QApplication(sys.argv)
+
 # Example signals
-signal1 = np.sin(np.linspace(0, 2 * np.pi, 500))
-signal2 = np.cos(np.linspace(0, 2 * np.pi, 500))
+signal1 = np.sin(np.linspace(0, 2 * np.pi, 500))  # Sine wave
+signal2 = np.cos(np.linspace(0, 2 * np.pi, 500))  # Cosine wave
 
-# Glue the signals with custom parameters
+# Create an instance of the SignalGlue class
 glue = SignalGlue(signal1, signal2)
-glue_params = {
-    "start_x": 100,  # Start index for the first signal
-    "size_x": 200,   # Size of the segment to extract from the first signal
-    "start_y": 50,   # Start index for the second signal
-    "size_y": 200,   # Size of the segment to extract from the second signal
-    "gap": 100,      # Gap of 100 points
-    "interpolation_order": "linear"
-}
-combined_signal = glue.glue_signals(glue_params)
 
-# Plot original signals with start and size lines
-for idx, (signal, title, start, size) in enumerate(zip(
-        [signal1, signal2],
-        ["Signal 1: Sine Wave", "Signal 2: Cosine Wave"],
-        [glue_params["start_x"], glue_params["start_y"]],
-        [glue_params["size_x"], glue_params["size_y"]]
-    )):
-    plt.figure(figsize=(6, 4))
-    plt.plot(signal)
-    plt.title(title)
+# Create the main window
+main_window = QtWidgets.QWidget()
+layout = QtWidgets.QVBoxLayout()
 
-    # Add vertical line for start point
-    plt.axvline(x=start, color='r', linestyle='--', label='Start Point')
+# Create the plot for the sine wave
+plot_widget_x = pg.PlotWidget(title="Signal 1: Sine Wave")
+plot_widget_x.plot(signal1, pen='b')
 
-    # Add vertical line for end point (start + size)
-    plt.axvline(x=start + size, color='g', linestyle='--', label='End Point (Start + Size)')
+# Create the plot for the cosine wave
+plot_widget_y = pg.PlotWidget(title="Signal 2: Cosine Wave")
+plot_widget_y.plot(signal2, pen='r')
 
-    plt.xlabel("Sample Index")
-    plt.ylabel("Amplitude")
-    plt.legend()
-    plt.show()
+# Add draggable regions for selection
+lr_x = pg.LinearRegionItem([100, 200], movable=True, brush=pg.mkBrush(150, 150, 150, 100))  # Movable sine part
+plot_widget_x.addItem(lr_x)
 
-# Generate a plot for the glued signal and save it
-plt.plot(combined_signal)
-plt.title("Glued Signal")
-plt.xlabel("Sample Index")
-plt.ylabel("Amplitude")
-plt.savefig("glued_signal.png")
-plt.show()
+lr_y = pg.LinearRegionItem([150, 250], movable=True, brush=pg.mkBrush(150, 50, 150, 100))  # Movable cosine part
+plot_widget_y.addItem(lr_y)
+
+# Add a gap input for user to specify the gap between signals
+gap_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+gap_slider.setRange(0, 100)  # Set range for the gap
+gap_slider.setValue(20)  # Set a default value for the gap
+gap_label = QtWidgets.QLabel("Gap: 20 samples")
+
+def update_gap_label(value):
+    gap_label.setText(f"Gap: {value} samples")
+
+gap_slider.valueChanged.connect(update_gap_label)
+
+layout.addWidget(plot_widget_x)
+layout.addWidget(plot_widget_y)
+layout.addWidget(gap_label)
+layout.addWidget(gap_slider)
+
+# Button to open combined window
+combine_button = QtWidgets.QPushButton("Combine Selected Signals")
+combine_button.clicked.connect(lambda: open_combined_window(
+    int(lr_x.getRegion()[0]),
+    int(lr_x.getRegion()[1] - lr_x.getRegion()[0]),
+    int(lr_y.getRegion()[0]),
+    int(lr_y.getRegion()[1] - lr_y.getRegion()[0]),
+    gap_slider.value()  # Get gap value from the slider
+))
+
+layout.addWidget(combine_button)
+
+main_window.setLayout(layout)
+main_window.setWindowTitle("Signal Selection")
+main_window.resize(800, 600)
+main_window.show()
+
+# Start the Qt event loop
+sys.exit(app.exec_())
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
