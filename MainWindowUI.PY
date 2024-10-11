@@ -7,16 +7,16 @@ from PyQt5.uic import loadUi
 import sys
 import numpy as np
 
-class MainUI(QMainWindow):
+class MainWindowUI(QMainWindow):
     def __init__(self):
-        super(MainUI, self).__init__()
-        loadUi("MainWindow.ui", self)
+        super(MainWindowUI, self).__init__()
+        loadUi("MainWindowUI.ui", self)
         self.signal_params = Signal()
         self.signal_app = SignalViewerApp()
-        self.color_push_button = self.findChild(QPushButton, "color_push_button")
-        self.color_push_button.clicked.connect(self.signal_params.change_color)
+        # self.color_push_button = self.findChild(QPushButton, "color_push_button")
+        # self.color_push_button.clicked.connect(self.signal_params.change_color)
 
-        self.pushButton_6 = self.findChild(QPushButton, "pushButton_6")
+        self.pause = self.findChild(QPushButton, "pause")
 
         self.graph_widget = self.findChild(QWidget, "Graph1_widget")
 
@@ -34,7 +34,7 @@ class MainUI(QMainWindow):
         self.graph.visualize_graph()
         
         # Connect button to pause functionality
-        self.pushButton_6.clicked.connect(self.graph.pause_signal)
+        self.pause.clicked.connect(self.graph.pause_signal)
 
 
 
@@ -46,6 +46,6 @@ class MainUI(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = MainUI()
+    window = MainWindowUI()
     window.show()
     sys.exit(app.exec_())  # Use sys.exit to properly exit the application

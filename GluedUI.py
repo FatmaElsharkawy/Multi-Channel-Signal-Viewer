@@ -6,7 +6,7 @@ import numpy as np
 class GluedUI(QMainWindow):
     def __init__(self):
         super(GluedUI, self).__init__()
-        loadUi("Glued.ui", self)
+        loadUi("GluedUI.ui", self)
 
 
 
