@@ -19,3 +19,4 @@ second_column = csvFile.iloc[:, 1].values
 # Print the arrays
 print("First Column:", first_column)
 print("Second Column:", second_column)
+#print("Second Column:", type(second_column))
