@@ -22,11 +22,13 @@ class MainUI(QMainWindow):
 
 
         # Generating some sample data for the signal
-        data_x= self.signal_params.signal_data_time
-        data_y= self.signal_params.signal_data_amplitude
+        # data_x= self.signal_params.signal_data_time
+        # data_y= self.signal_params.signal_data_amplitude
+        t = np.linspace(0, 20, 1000)  # Time vector extended to 20 seconds
+        data = np.sin(2 * np.pi * t)  # Example signal (sine wave)
 
         # Create the Graph instance, embedding it in "Graph1_widget"
-        self.graph = Graph(self.graph_widget, signal_x= data_x, signal_y=data_y, window_size=10, title="Graph 1", graph_num=1, is_linked=False)
+        self.graph = Graph(self.graph_widget, signal_x= t, signal_y=data, window_size=10, title="Graph 1", graph_num=1, is_linked=False)
 
         # Automatically visualize the signal in the widget
         self.graph.visualize_graph()
@@ -47,5 +49,3 @@ if __name__ == '__main__':
     window = MainUI()
     window.show()
     sys.exit(app.exec_())  # Use sys.exit to properly exit the application
-
-    
