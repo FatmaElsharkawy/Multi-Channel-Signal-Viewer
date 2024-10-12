@@ -71,7 +71,7 @@ glue_params = {
     "size_x": 200,   # Size of the segment to extract from the first signal
     "start_y": 50,   # Start index for the second signal
     "size_y": 200,   # Size of the segment to extract from the second signal
-    "gap": 100,     # Overlap of 50 points
+    "gap": -30,     # Overlap of 50 points
     "interpolation_order": "linear"
 }
 combined_signal = glue.glue_signals(glue_params)
