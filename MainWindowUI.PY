@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton, QVBoxLayout, 
 from PyQt5.uic import loadUi
 import sys
 import numpy as np
+import icons.icons_rc
 
 class MainWindowUI(QMainWindow):
     def __init__(self):
@@ -47,6 +48,7 @@ class MainWindowUI(QMainWindow):
         self.zoom.valueChanged.connect(self.graph.set_zoom_value)  # Connect slider value change to update_zoom method
 
         # Connect slider to speed functionality
+        self.speed = self.findChild(QSlider, "speed")
         self.speed = self.findChild(QSlider, "speed")
         self.speed.setMinimum(1)  # Set minimum zoom value
         self.speed.setMaximum(50)  # Set maximum zoom value
