@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton, QVBoxLayout, 
 from PyQt5.uic import loadUi
 import sys
 import numpy as np
+import icons.icons_rc
 
 class MainWindowUI(QMainWindow):
     def __init__(self):
