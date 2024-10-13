@@ -17,10 +17,10 @@ class MainWindowUI(QMainWindow):
         data_x= np.linspace(0,20,1000)
         data_y= np.cos(2*np.pi*data_x)
         print(data_x)
-        self.color_push_button = self.findChild(QPushButton, "color_push_button")
-        self.color_push_button.clicked.connect(self.signal_params.change_color)
+        # self.color_push_button = self.findChild(QPushButton, "color_push_button")
+        # self.color_push_button.clicked.connect(self.signal_params.change_color)
         
-        self.pause = self.findChild(QPushButton, "pushButton_6")
+        self.pause = self.findChild(QPushButton, "pause")
        # self.resume = self.findChild(QPushButton, "pushButton_7")
 
         self.graph_widget = self.findChild(QWidget, "Graph1_widget")
@@ -40,14 +40,14 @@ class MainWindowUI(QMainWindow):
         self.graph.visualize_graph()
         
          # Connect slider to zoom functionality
-        self.zoom = self.findChild(QSlider, "horizontalSlider")
+        self.zoom = self.findChild(QSlider, "zoom")
         self.zoom.setMinimum(1)  # Set minimum zoom value
         self.zoom.setMaximum(100)  # Set maximum zoom value
         self.zoom.setValue(50)  # Set initial zoom value
         self.zoom.valueChanged.connect(self.graph.set_zoom_value)  # Connect slider value change to update_zoom method
 
         # Connect slider to speed functionality
-        self.speed = self.findChild(QSlider, "horizontalSlider_3")
+        self.speed = self.findChild(QSlider, "speed")
         self.speed.setMinimum(1)  # Set minimum zoom value
         self.speed.setMaximum(20)  # Set maximum zoom value
         self.speed.setValue(10)  # Set initial zoom value
