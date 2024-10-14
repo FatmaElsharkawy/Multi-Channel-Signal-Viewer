@@ -3,19 +3,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.widgets import Button
 
-# Load data
-df = pd.read_csv("radar_data.csv", header=None, sep=',')  # Use sep=',' for comma-separated data
-
-# Use only 10% of the data
-df_sampled = df.sample(frac=0.1, random_state=1)  # Randomly sample 10% of the data
-radii = df_sampled[0].values  # First column for distances (radii)
-angles = df_sampled[1].values  # Second column for angles
+# Step 1: Initialize parameters for the radar signal
+num_targets = 100  # Number of targets
+radii = np.random.rand(num_targets) * 10  # Initial distances of targets
+angles = np.random.rand(num_targets) * 2 * np.pi  # Initial angles of targets
 
 # Function to update target positions
 def update_positions(radii, angles):
     # Update angles and radii to simulate movement
-    angles += np.random.uniform(-0.1, 0.1, len(radii))  # Slightly randomize angles
-    radii += np.random.uniform(-0.1, 0.1, len(radii))  # Slightly randomize radii
+    angles += np.random.uniform(-0.1, 0.1, num_targets)  # Slightly randomize angles
+    radii += np.random.uniform(-0.1, 0.1, num_targets)  # Slightly randomize radii (within bounds)
     radii = np.clip(radii, 0, 10)  # Ensure radii stay within bounds (0 to 10)
     return radii, angles
 
@@ -38,7 +35,10 @@ stop_button = Button(stop_ax, 'Stop')
 stop_button.on_clicked(stop)
 
 # Animation loop
-for _ in range(30):  # Number of frames
+for _ in range(100):  # Number of frames
+    if stop_animation:  # Check if stop button was clicked
+        break
+
     ax.clear()  # Clear the previous frame
     ax.set_ylim(0, 10)  # Reset limits
 
@@ -52,10 +52,6 @@ for _ in range(30):  # Number of frames
 
     # Pause to create animation effect
     plt.pause(0.1)  # Pause for 100 ms
-
-    # Break the loop if stop button is clicked
-    if stop_animation:
-        break
 
 # Turn off interactive mode
 plt.ioff()
