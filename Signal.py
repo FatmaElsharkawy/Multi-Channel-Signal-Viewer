@@ -5,32 +5,32 @@ import pandas as pd
 # from SignalViewerApp import SignalViewerApp 
 
 class Signal():
-    
-    signals_num=0
-    def __init__(self, csv_path= 'rec_1r.csv'):
+    signals_num_graph1, signals_num_graph2= 0,0
+   
+    def __init__(self, graph_num, csv_path= 'rec_1r.csv'):
         super().__init__()
-        
         self.csv_path = csv_path
         csvFile = pd.read_csv(self.csv_path)   
 
         self.signal_data_time = csvFile.iloc[:, 0].values
         self.signal_data_amplitude = csvFile.iloc[:, 1].values
-        
         self.signal_type= None
         self.color= "blue" 
         self.speed=None
-        Signal.signals_num += 1
-        self.signal_num= Signal.signals_num
+       
+        self.graph_num= graph_num
+        if graph_num ==1: 
+            Signal.signals_num_graph1 +=1 
+            self.signal_num= Signal.signals_num_graph1
+        elif graph_num==2:
+            Signal.signals_num_graph2 +=1 
+            self.signal_num= Signal.signals_num_graph2
+        
         self.label=f"Signal{self.signal_num}"
         
-        
-        #self.ui = Ui_signalViewer()
-        # self.ui.setupUi(self)
-        
-        print("before")
+        print(self.label, self.signal_num)
 
     def change_color(self):
-        print("aafter")
         selected_color = QColorDialog.getColor()
         if selected_color.isValid():  # Check if a valid color was selected
             color_name = selected_color.name()  # Get the color name (e.g., #ff0000)
@@ -38,8 +38,7 @@ class Signal():
             self.color = color_name  # Update the signal color
             print(self.color)
         
-    def add_label(self,new_label):
-        
+    def set_label(self,new_label):  
         self.label=new_label
 
 # signal = Signal()

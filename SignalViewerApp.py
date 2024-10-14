@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.QtCore import pyqtSlot
-
+from Signal import Signal
 class SignalViewerApp():
     def __init__(self):
         
@@ -24,26 +24,29 @@ class SignalViewerApp():
     @pyqtSlot()
     def browse_signals(self):
         # Open a file dialog for the user to select a signal file
-        self.file_path, _ = QFileDialog.getOpenFileName(self, "Open Signal File", "", 
+        self.file_path, _ = QFileDialog.getOpenFileName(None, "Open Signal File", "", 
                                                          "Signal Files (*.edf *.csv *.hdf5)")
         if self.file_path:
             # Extract the file extension
-            self.file_extension = self.file_path.split('.')[-3].lower()
-            self.check_extension()
+            self.file_extension = self.file_path.split('.')[-1].lower()
+            if self.check_extension():
+                return self.file_path,
         else:
-            QMessageBox.warning(self, "No file selected", "Please select a signal file to upload.")
+            QMessageBox.warning(None, "No file selected", "Please select a signal file to upload.")
     
     def check_extension(self):
         # Example validation for allowed file extensions
         if self.file_extension not in ['csv', 'edf', 'hdf5']:
-            QMessageBox.warning(self, "Unsupported File", "The selected file type is not supported.")
+            QMessageBox.warning(None, "Unsupported File", "The selected file type is not supported.")
         else:
             # Proceed with further processing, e.g., load the file into memory
-            QMessageBox.information(self, "File Uploaded", f"File uploaded successfully: {self.file_path}")
+            QMessageBox.information(None, "File Uploaded", f"File uploaded successfully: {self.file_path}")
             self.file_path_list.append(self.file_path)
+            return True
+            
 
     def export_pdf(self):
-        saved_file_path, _= QFileDialog.getSaveFileName(self, 'Export PDF', "", "PDF Files (*.pdf)")
+        saved_file_path, _= QFileDialog.getSaveFileName(None, 'Export PDF', "", "PDF Files (*.pdf)")
         
         if saved_file_path:
             if not file_path.endswith(".pdf"):
@@ -53,15 +56,12 @@ class SignalViewerApp():
     
     def get_signal_path(self, signal_num):
         if  isinstance(signal_num, int):
-            return self.file_path_list[signal_num]
+            return self.file_path_list[signal_num-1]
 
     @staticmethod
     def connect_website():
         pass
 
 
-# if __name__ == '__main__':
-#     app = QApplication([])
-#     window = Ui_signalViewer()
-#     window.show()
-#     sys.exit(app.exec_())
+    
+
