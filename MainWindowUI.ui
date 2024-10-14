@@ -293,7 +293,7 @@ QPushButton:pressed {
      </column>
      <column>
       <property name="text">
-       <string>Graph No</string>
+       <string>Graph Num</string>
       </property>
      </column>
      <column>
