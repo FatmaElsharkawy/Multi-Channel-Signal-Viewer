@@ -14,9 +14,10 @@ class MainWindowUI(QMainWindow):
         loadUi("MainWindowUI.ui", self)
         self.signal_params = Signal()
         self.signal_app = SignalViewerApp()
+
         # Generating some sample data for the signal
-        data_x= np.linspace(0,20,1000)
-        data_y= np.cos(2*np.pi*data_x)
+        #data_x= np.linspace(0,20,1000)
+        #data_y= np.cos(2*np.pi*data_x)
 
         #print(data_x)
         #self.color_push_button = self.findChild(QPushButton, "color")
@@ -25,20 +26,22 @@ class MainWindowUI(QMainWindow):
         self.pause = self.findChild(QPushButton, "pause")
         self.play = self.findChild(QPushButton, "play")
         self.rewind = self.findChild(QRadioButton, "rewind")
-
+        self.upload_file= self.findChild(QPushButton, "uploadfile_C1")
 
         self.graph_widget = self.findChild(QWidget, "Graph1_signalview")  
         self.graph = Graph(self.graph_widget, signal_x= data_x, signal_y=data_y,title="Graph 1", graph_num=1, is_linked=False)
 
         # Generating some sample data for the signal
-        # data_x= self.signal_params.signal_data_time
-        # data_y= self.signal_params.signal_data_amplitude
+        data_x= self.signal_params.signal_data_time
+        data_y= self.signal_params.signal_data_amplitude
         
 
         # Connect button to pause functionality
         self.pause.clicked.connect(self.graph.pause_signal)
         self.play.clicked.connect(self.graph.resume_signal)
         self.rewind.clicked.connect(self.graph.rewind_signal)
+        self.upload_file.clicked.connect(self.signal_app.browse_signals)
+
 
         # Automatically visualize the signal in the widget
         self.graph.visualize_graph()

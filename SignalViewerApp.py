@@ -11,7 +11,8 @@ class SignalViewerApp():
         # self.ui.setupUi(self)
         # ui_instance = self.ui 
         # Set the initial file paths as None
-        self.file_path = None
+        self.file_path_list = []
+        self.file_path=None
         self.file_extension = None
         self.real_time_signal= None
 
@@ -39,6 +40,7 @@ class SignalViewerApp():
         else:
             # Proceed with further processing, e.g., load the file into memory
             QMessageBox.information(self, "File Uploaded", f"File uploaded successfully: {self.file_path}")
+            self.file_path_list.append(self.file_path)
 
     def export_pdf(self):
         saved_file_path, _= QFileDialog.getSaveFileName(self, 'Export PDF', "", "PDF Files (*.pdf)")
@@ -49,8 +51,9 @@ class SignalViewerApp():
             # Generate and save the PDF
             # generate_pdf(file_path)
     
-    def get_signal_path(self):
-        return self.file_path
+    def get_signal_path(self, signal_num):
+        if  isinstance(signal_num, int):
+            return self.file_path_list[signal_num]
 
     @staticmethod
     def connect_website():
