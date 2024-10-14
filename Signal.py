@@ -5,12 +5,13 @@ import pandas as pd
 # from SignalViewerApp import SignalViewerApp 
 
 class Signal():
-
-    def __init__(self):
+    
+    signals_num=0
+    def __init__(self, csv_path= 'rec_1r.csv'):
         super().__init__()
         
-        self.cvs_file_name = 'rec_1r.csv'
-        csvFile = pd.read_csv(self.cvs_file_name)   
+        self.csv_path = csv_path
+        csvFile = pd.read_csv(self.csv_path)   
 
         self.signal_data_time = csvFile.iloc[:, 0].values
         self.signal_data_amplitude = csvFile.iloc[:, 1].values
@@ -18,7 +19,10 @@ class Signal():
         self.signal_type= None
         self.color= "blue" 
         self.speed=None
-        self.label="Signal"
+        Signal.signals_num += 1
+        self.signal_num= Signal.signals_num
+        self.label=f"Signal{self.signal_num}"
+        
         
         #self.ui = Ui_signalViewer()
         # self.ui.setupUi(self)
