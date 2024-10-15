@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QColorDialog, QPushButton, QMainWindow
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor,QBrush
 import pandas as pd
+from Graph import Graph 
+ 
 
 # from SignalViewerApp import SignalViewerApp 
 
@@ -30,14 +32,25 @@ class Signal():
         
         print(self.label, self.signal_num)
 
-    def change_color(self):
-        selected_color = QColorDialog.getColor()
-        if selected_color.isValid():  # Check if a valid color was selected
-            color_name = selected_color.name()  # Get the color name (e.g., #ff0000)
-            # Use self.ui.color_push_button to reference the button through the ui attribute
-            self.color = color_name  # Update the signal color
-            print(self.color)
+    def change_color(current_row):
+        print("aafter")
+        if current_row >= 0:
+            # Get the graph_number of the selected signal
+            selected_color = QColorDialog.getColor()
+
         
+            if selected_color.isValid():  # Check if a valid color was selected
+                
+                color_name = selected_color.name()
+                color = color_name  # Get the color name (e.g., #ff0000)
+
+                #    self.signals_info_table_1.item(current_row, 2).setBackground(
+                #         QBrush(self.color)  )
+                return color
+
+               
+    def set_color(self,new_color):  
+        self.color=new_color 
     def set_label(self,new_label):  
         self.label=new_label
 
