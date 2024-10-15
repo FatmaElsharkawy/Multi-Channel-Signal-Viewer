@@ -14,7 +14,6 @@ class SignalViewerApp():
         self.file_path_list = []
         self.file_path=None
         self.file_extension = None
-        self.real_time_signal= None
 
 
         # Connect the button click event to the function
@@ -57,11 +56,6 @@ class SignalViewerApp():
     def get_signal_path(self, signal_num):
         if  isinstance(signal_num, int):
             return self.file_path_list[signal_num-1]
-
-    @staticmethod
-    def connect_website():
-        pass
-
 
     
 

@@ -3,4 +3,7 @@ signal_report.pdf
 signal1.png
 signal2.png
 env
+__pycache__/
+rec_1r.csv
+
 

@@ -26,8 +26,10 @@ class MainWindowUI(QMainWindow):
         self.graph_selected= self.findChild(QComboBox, "comboBox")
 
         self.table1= self.findChild(QTableWidget, "tableWidget_C1")
-        self.table2= self.findChild(QTableWidget, "tableWidget_C2")
+        self.table2= self.findChild(QTableWidget, "tableWidget_C1_2")
 
+        self.linked= self.findChild(QCheckBox, "linked_chechbox")
+        self.linked.clicked.connect(self.link_graphs) #it's called each time the button is clicked (checked or unchecked)
 
         self.pause = self.findChild(QPushButton, "pause")
         self.play = self.findChild(QPushButton, "play")
@@ -71,6 +73,8 @@ class MainWindowUI(QMainWindow):
             self.graph2.add_signal(data_x, data_y, self.signal)
 
     def pause_signal(self):
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.pause_signal(self.graph2)
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.pause_signal()
@@ -78,20 +82,26 @@ class MainWindowUI(QMainWindow):
             self.graph2.pause_signal()
 
     def resume_signal(self):
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.resume_signal(self.graph2)
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.resume_signal()
         elif selected_value == 'Graph2': 
             self.graph2.resume_signal()
 
-    def rewind_signal(self):
+    def rewind_signal(self, is_option_chosen):
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.rewind_signal(self.graph2)
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
-            self.graph1.rewind_signal()
+            self.graph1.rewind_signal(is_option_chosen)
         elif selected_value == 'Graph2': 
-            self.graph2.rewind_signal()
+            self.graph2.rewind_signal(is_option_chosen)
 
-    def set_zoom_value(self, value):   
+    def set_zoom_value(self, value):
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.set_zoom_value(value, self.graph2) 
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.set_zoom_value(value)
@@ -99,7 +109,9 @@ class MainWindowUI(QMainWindow):
             self.graph2.set_zoom_value(value)    
 
                 
-    def set_speed_value(self, value):   
+    def set_speed_value(self, value):
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.set_speed_value(value, self.graph2) 
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.set_speed_value(value)
@@ -126,6 +138,23 @@ class MainWindowUI(QMainWindow):
             self.table2.setItem(row_position, 2, QTableWidgetItem("Blue"))
             checkbox = QCheckBox()
             self.table2.setCellWidget(row_position, 3, checkbox)
+    
+    def link_graphs(self):
+        if self.linked.isChecked():
+            print("graphs will be linked")
+            self.graph_selected.setEnabled(False)
+            self.graph_selected.setStyleSheet("""
+                QComboBox {
+                    background-color: #D3D3D3;  /* Light gray color to mimic disabled state */
+                    color: #A9A9A9;             /* Dark gray text to mimic disabled text */
+                    border: 1px solid #A9A9A9;  /* Optional: Add a border color to match */
+                }
+            """)
+            self.graph1.link_graphs(self.graph2)
+        else:
+            self.graph_selected.setEnabled(True)
+            self.graph_selected.setStyleSheet("")  # Resets to the default style
+
 
 
 if __name__ == '__main__':
