@@ -99,7 +99,7 @@ class MainWindowUI(QMainWindow):
         current_row = table.currentRow()
 
         # Add "Switch Graph" action and connect it to the switch_graph function with the selected row
-        # switch_graph_action = context_menu.addAction("Switch Graph")
+        switch_graph_action = context_menu.addAction("Switch Graph")
         # switch_graph_action.triggered.connect(lambda: self.switch_graph(selected_row))
         
         change_color_action = context_menu.addAction("Change Color")
@@ -243,6 +243,7 @@ class MainWindowUI(QMainWindow):
         elif selected_value == 'Graph2': 
             self.graph2.set_zoom_value(value)    
 
+    
                 
                 
     def set_speed_value(self, value):
@@ -260,6 +261,7 @@ class MainWindowUI(QMainWindow):
     def add_row(self, signal, graph_num): 
         if graph_num==1:
             row_position = self.table1.rowCount()
+            Signal.row_signal_map_1[row_position]= signal 
             self.table1.insertRow(row_position) 
             self.table1.setItem(row_position, 0, QTableWidgetItem(f"Signal{signal.signal_num}"))
             self.table1.setItem(row_position, 1, QTableWidgetItem("Graph1"))
@@ -270,6 +272,7 @@ class MainWindowUI(QMainWindow):
                         
         elif graph_num==2:
             row_position = self.table2.rowCount()
+            Signal.row_signal_map_2[row_position]= signal
             self.table2.insertRow(row_position) 
             self.table2.setItem(row_position, 0, QTableWidgetItem(f"Signal{signal.signal_num}"))
             self.table2.setItem(row_position, 1, QTableWidgetItem("Graph2"))

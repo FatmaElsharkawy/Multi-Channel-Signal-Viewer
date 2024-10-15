@@ -8,6 +8,8 @@ from Graph import Graph
 
 class Signal():
     signals_num_graph1, signals_num_graph2= 0,0
+    row_signal_map_1= {} #row_signal_map[row]= signal
+    row_signal_map_2= {} 
    
     def __init__(self, graph_num, csv_path= 'rec_1r.csv'):
         super().__init__()
@@ -19,8 +21,10 @@ class Signal():
         self.signal_type= None
         self.color= "blue" 
         self.speed=None
-       
+        
         self.graph_num= graph_num
+
+        
         if graph_num ==1: 
             Signal.signals_num_graph1 +=1 
             self.signal_num= Signal.signals_num_graph1
@@ -32,21 +36,19 @@ class Signal():
         
         print(self.label, self.signal_num)
 
-    def change_color(current_row):
+    def change_color(self,current_row):
         print("aafter")
         if current_row >= 0:
             # Get the graph_number of the selected signal
             selected_color = QColorDialog.getColor()
 
+
         
             if selected_color.isValid():  # Check if a valid color was selected
                 
                 color_name = selected_color.name()
-                color = color_name  # Get the color name (e.g., #ff0000)
-
-                #    self.signals_info_table_1.item(current_row, 2).setBackground(
-                #         QBrush(self.color)  )
-                return color
+                 
+                self.row_signal_map_1[current_row].color= color_name
 
                
     def set_color(self,new_color):  

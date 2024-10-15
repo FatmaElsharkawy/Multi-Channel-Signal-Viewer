@@ -158,6 +158,7 @@ class Graph:
         self.update_graph()  # Refresh the graph based on the new current frame
 
     
+    
     def update_graph(self):
         frame = self.current_frame
         for idx, plot in enumerate(self.signal_plots):
