@@ -21,7 +21,7 @@ class Signal():
         self.signal_type= None
         self.color= "blue" 
         self.speed=None
-        
+        self.visible= True
         self.graph_num= graph_num
 
         
@@ -50,7 +50,9 @@ class Signal():
                  
                 self.row_signal_map_1[current_row].color= color_name
 
-               
+    def set_visible(self,visible):
+        self.visible= visible
+
     def set_color(self,new_color):  
         self.color=new_color 
     def set_label(self,new_label):  

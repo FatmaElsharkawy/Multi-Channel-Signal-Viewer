@@ -5,6 +5,8 @@ from Graph import Graph
 import paho.mqtt.client as mqtt
 from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton, QWidget, QSlider, QRadioButton, QComboBox, QTableWidget, QTableWidgetItem, QCheckBox,QMenu
 from PyQt5.uic import loadUi
+from PyQt5.QtWidgets import QTableWidgetItem, QCheckBox
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCursor,QBrush
 from PyQt5.QtCore import QPoint
 import sys
@@ -39,6 +41,7 @@ class MainWindowUI(QMainWindow):
         self.horizontal_scrollbar = self.findChild(QSlider, "graph1_Hslider")
         # self.horizontal_scrollbar.valueChanged.connect(self.zoom)
         
+       
 
         # Other initializations ...
 
@@ -119,6 +122,23 @@ class MainWindowUI(QMainWindow):
             self.horizontal_scrollbar.setValue(frame)
         else:
             self.horizontal_scrollbar.setValue(self.horizontal_scrollbar.maximum())
+
+    def toggle_signal_visibility(self, current_row, state):
+        """Toggle the visibility of the signal based on the checkbox state."""
+        if current_row >= 0:
+            # Get the checkbox state (0 = Unchecked, 2 = Checked)
+            visible = (state == Qt.Checked)  # Check if the checkbox is checked
+            
+            # Get the signal number based on the first column
+            signal_num = int(self.table1.item(current_row, 0).text().replace("Signal", "")) - 1
+            
+            # Update the visibility of the signals in both graphs
+            if self.graph1 is not None:
+                self.graph1.set_signal_visibility(signal_num, visible)  # Update Graph 1 visibility
+            if self.graph2 is not None:
+                self.graph2.set_signal_visibility(signal_num, visible)  # Update Graph 2 visibility
+
+        
 
     def control_color(self, table, current_row):
         if current_row >= 0:
@@ -265,9 +285,21 @@ class MainWindowUI(QMainWindow):
             self.table1.insertRow(row_position) 
             self.table1.setItem(row_position, 0, QTableWidgetItem(f"Signal{signal.signal_num}"))
             self.table1.setItem(row_position, 1, QTableWidgetItem("Graph1"))
-            self.table1.setItem(row_position, 2, QTableWidgetItem("Blue"))
+            self.table1.setItem(row_position, 2, QTableWidgetItem())
+
+            # graph_item = QTableWidgetItem("Graph1")
+            # graph_item.setFlags(graph_item.flags() & ~QTableWidgetItem.ItemIsEditable)  # Disable editing
+            # self.table1.setItem(row_position, 1, graph_item)
+
+            # # Create an uneditable item for the color
+            # color_item = QTableWidgetItem()  # This can be blank initially
+            # color_item.setFlags(color_item.flags() & ~QTableWidgetItem.ItemIsEditable)  # Disable editing
+            # self.table1.setItem(row_position, 2, color_item)
+
             checkbox = QCheckBox()
-            self.table1.setCellWidget(row_position, 3, checkbox)  # Set checkbox in the fourth column
+            checkbox.setChecked(True)  # Set checkbox in the fourth column
+            checkbox.stateChanged.connect(lambda state: self.toggle_signal_visibility(row_position, state))  # Connect state change
+            self.table1.setCellWidget(row_position, 3, checkbox)
 
                         
         elif graph_num==2:
@@ -279,6 +311,7 @@ class MainWindowUI(QMainWindow):
             self.table2.setItem(row_position, 2, QTableWidgetItem("Blue"))
             checkbox = QCheckBox()
             self.table2.setCellWidget(row_position, 3, checkbox)
+            checkbox.setChecked(True)
 
     def link_graphs(self):
         if self.linked.isChecked():
