@@ -141,53 +141,55 @@ def open_combined_window(start_x, size_x, start_y, size_y, gap):
     return combined_window  # Return the window reference
 
 
+
+if __name__ == "__main__":
 # PyQt application setup
-app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
-# Example signals
-signal1 = np.sin(np.linspace(0, 2 * np.pi, 500))  # Sine wave
-signal2 = np.cos(np.linspace(0, 2 * np.pi, 500))  # Cosine wave
+    # Example signals
+    signal1 = np.sin(np.linspace(0, 2 * np.pi, 500))  # Sine wave
+    signal2 = np.cos(np.linspace(0, 2 * np.pi, 500))  # Cosine wave
 
-# Create an instance of the SignalGlue class
-glue = SignalGlue(signal1, signal2)
+    # Create an instance of the SignalGlue class
+    glue = SignalGlue(signal1, signal2)
+    
+    # Create the main window
+    main_window = QtWidgets.QWidget()
+    layout = QtWidgets.QVBoxLayout()
 
-# Create the main window
-main_window = QtWidgets.QWidget()
-layout = QtWidgets.QVBoxLayout()
+    # Create the plot for the sine wave
+    plot_widget_x = pg.PlotWidget(title="Signal 1: Sine Wave")
+    plot_widget_x.plot(signal1, pen='b')
 
-# Create the plot for the sine wave
-plot_widget_x = pg.PlotWidget(title="Signal 1: Sine Wave")
-plot_widget_x.plot(signal1, pen='b')
+    # Create the plot for the cosine wave
+    plot_widget_y = pg.PlotWidget(title="Signal 2: Cosine Wave")
+    plot_widget_y.plot(signal2, pen='r')
 
-# Create the plot for the cosine wave
-plot_widget_y = pg.PlotWidget(title="Signal 2: Cosine Wave")
-plot_widget_y.plot(signal2, pen='r')
+    # Add draggable regions for selection
+    lr_x = pg.LinearRegionItem([100, 200], movable=True, brush=pg.mkBrush(150, 150, 150, 100))  # Movable sine part
+    plot_widget_x.addItem(lr_x)
 
-# Add draggable regions for selection
-lr_x = pg.LinearRegionItem([100, 200], movable=True, brush=pg.mkBrush(150, 150, 150, 100))  # Movable sine part
-plot_widget_x.addItem(lr_x)
+    lr_y = pg.LinearRegionItem([150, 250], movable=True, brush=pg.mkBrush(150, 50, 150, 100))  # Movable cosine part
+    plot_widget_y.addItem(lr_y)
 
-lr_y = pg.LinearRegionItem([150, 250], movable=True, brush=pg.mkBrush(150, 50, 150, 100))  # Movable cosine part
-plot_widget_y.addItem(lr_y)
+    # Button to open combined window
+    combine_button = QtWidgets.QPushButton("Combine and Adjust Gap")
+    combine_button.clicked.connect(lambda: open_combined_window(
+        int(lr_x.getRegion()[0]),
+        int(lr_x.getRegion()[1] - lr_x.getRegion()[0]),
+        int(lr_y.getRegion()[0]),
+        int(lr_y.getRegion()[1] - lr_y.getRegion()[0]),
+        gap=20  # Set a default gap value
+    ))
 
-# Button to open combined window
-combine_button = QtWidgets.QPushButton("Combine and Adjust Gap")
-combine_button.clicked.connect(lambda: open_combined_window(
-    int(lr_x.getRegion()[0]),
-    int(lr_x.getRegion()[1] - lr_x.getRegion()[0]),
-    int(lr_y.getRegion()[0]),
-    int(lr_y.getRegion()[1] - lr_y.getRegion()[0]),
-    gap=20  # Set a default gap value
-))
+    layout.addWidget(plot_widget_x)
+    layout.addWidget(plot_widget_y)
+    layout.addWidget(combine_button)
 
-layout.addWidget(plot_widget_x)
-layout.addWidget(plot_widget_y)
-layout.addWidget(combine_button)
+    main_window.setLayout(layout)
+    main_window.setWindowTitle("Signal Selection")
+    main_window.resize(800, 600)
+    main_window.show()
 
-main_window.setLayout(layout)
-main_window.setWindowTitle("Signal Selection")
-main_window.resize(800, 600)
-main_window.show()
-
-# Start the Qt event loop
-sys.exit(app.exec_())
+    # Start the Qt event loop
+    sys.exit(app.exec_())

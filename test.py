@@ -5,7 +5,7 @@ from pyqtgraph.Qt import QtWidgets, QtCore  # Ensure QtCore is imported
 import sys
 import matplotlib.pyplot as plt
 
-class SignalGlue:
+class SignalGlue(QtWidgets.QApplication):
     def __init__(self, signal_x, signal_y):
         self.signal_x = signal_x
         self.signal_y = signal_y

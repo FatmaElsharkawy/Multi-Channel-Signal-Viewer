@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1504</width>
-    <height>1179</height>
+    <height>1116</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,14 +139,19 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>68</number>
+      <number>64</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>75</number>
+      <number>73</number>
      </attribute>
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
      <column>
       <property name="text">
        <string>Signal</string>
@@ -167,6 +172,38 @@ QPushButton:pressed {
        <string>Visibility</string>
       </property>
      </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string>1st signal</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string>ghraph1</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </item>
+     <item row="0" column="3">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="checkState">
+       <enum>Checked</enum>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="graph_two_channals" native="true">
@@ -278,14 +315,19 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>68</number>
+      <number>64</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>75</number>
+      <number>73</number>
      </attribute>
+     <row>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </row>
      <column>
       <property name="text">
        <string>Signal</string>
@@ -306,6 +348,38 @@ QPushButton:pressed {
        <string>Visibility</string>
       </property>
      </column>
+     <item row="0" column="0">
+      <property name="text">
+       <string>1st signal</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </item>
+     <item row="0" column="1">
+      <property name="text">
+       <string>ghraph1</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </item>
+     <item row="0" column="3">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="checkState">
+       <enum>Checked</enum>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="tools" native="true">
@@ -858,54 +932,6 @@ QRadioButton:pressed {
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pause_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>790</y>
-       <width>201</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: #235d79;    /* Blue color */
-    border-radius: 10px;          /* Rounded corners */
-    border: none;                 /* No border */
-    color: white;                 /* Text color */
-    padding: 5px 15px;            /* Padding for better text alignment */
-    
-    font-family: Arial, Helvetica, sans-serif;  /* Font family */
-    font-size: 16px;              /* Font size */
-    font-weight: bold;            /* Bold text */
-    letter-spacing: 1px;          /* Spacing between letters */
-    text-transform: uppercase;    /* Uppercase letters */
-}
-
-QPushButton:hover {
-    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
-}
-
-QPushButton:pressed {
-    background-color: #1b4b61;    /* Darker blue when pressed */
-}
-
-
-</string>
-     </property>
-     <property name="text">
-      <string>nonrectangular</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="Graph1_widget" native="true">
     <property name="geometry">
@@ -931,7 +957,7 @@ QPushButton:pressed {
       <rect>
        <x>50</x>
        <y>430</y>
-       <width>851</width>
+       <width>801</width>
        <height>22</height>
       </rect>
      </property>
@@ -980,9 +1006,9 @@ QSlider::add-page:horizontal {
      <property name="geometry">
       <rect>
        <x>880</x>
-       <y>40</y>
+       <y>70</y>
        <width>22</width>
-       <height>361</height>
+       <height>331</height>
       </rect>
      </property>
      <property name="cursor">
@@ -1040,7 +1066,7 @@ QSlider::add-page:vertical {
     <widget class="QPushButton" name="snapshot_G1">
      <property name="geometry">
       <rect>
-       <x>830</x>
+       <x>860</x>
        <y>10</y>
        <width>51</width>
        <height>51</height>
@@ -1126,8 +1152,8 @@ QPushButton:pressed {
     <widget class="QSlider" name="graph2_Vslider">
      <property name="geometry">
       <rect>
-       <x>890</x>
-       <y>60</y>
+       <x>880</x>
+       <y>70</y>
        <width>22</width>
        <height>341</height>
       </rect>
@@ -1187,9 +1213,9 @@ QSlider::add-page:vertical {
     <widget class="QSlider" name="graph2_Hslider">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>50</x>
        <y>440</y>
-       <width>851</width>
+       <width>801</width>
        <height>22</height>
       </rect>
      </property>
@@ -1237,7 +1263,7 @@ QSlider::add-page:horizontal {
     <widget class="QPushButton" name="snapshot_G2">
      <property name="geometry">
       <rect>
-       <x>840</x>
+       <x>860</x>
        <y>10</y>
        <width>51</width>
        <height>51</height>
@@ -1309,7 +1335,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1504</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="palette">
@@ -1369,15 +1395,6 @@ QPushButton:pressed {
         </color>
        </brush>
       </colorrole>
-      <colorrole role="PlaceholderText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="128">
-         <red>245</red>
-         <green>245</green>
-         <blue>245</blue>
-        </color>
-       </brush>
-      </colorrole>
      </active>
      <inactive>
       <colorrole role="WindowText">
@@ -1434,15 +1451,6 @@ QPushButton:pressed {
         </color>
        </brush>
       </colorrole>
-      <colorrole role="PlaceholderText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="128">
-         <red>245</red>
-         <green>245</green>
-         <blue>245</blue>
-        </color>
-       </brush>
-      </colorrole>
      </inactive>
      <disabled>
       <colorrole role="WindowText">
@@ -1496,15 +1504,6 @@ QPushButton:pressed {
          <red>24</red>
          <green>55</green>
          <blue>71</blue>
-        </color>
-       </brush>
-      </colorrole>
-      <colorrole role="PlaceholderText">
-       <brush brushstyle="SolidPattern">
-        <color alpha="128">
-         <red>0</red>
-         <green>0</green>
-         <blue>0</blue>
         </color>
        </brush>
       </colorrole>
@@ -1608,15 +1607,6 @@ QPushButton:pressed {
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>252</red>
-          <green>252</green>
-          <blue>252</blue>
-         </color>
-        </brush>
-       </colorrole>
       </active>
       <inactive>
        <colorrole role="WindowText">
@@ -1703,15 +1693,6 @@ QPushButton:pressed {
        <colorrole role="ToolTipText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>252</red>
-          <green>252</green>
-          <blue>252</blue>
-         </color>
-        </brush>
-       </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
           <red>252</red>
           <green>252</green>
           <blue>252</blue>
@@ -1807,15 +1788,6 @@ QPushButton:pressed {
           <red>252</red>
           <green>252</green>
           <blue>252</blue>
-         </color>
-        </brush>
-       </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>0</red>
-          <green>0</green>
-          <blue>0</blue>
          </color>
         </brush>
        </colorrole>
@@ -1911,15 +1883,6 @@ QPushButton:pressed {
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>241</red>
-          <green>241</green>
-          <blue>241</blue>
-         </color>
-        </brush>
-       </colorrole>
       </active>
       <inactive>
        <colorrole role="WindowText">
@@ -2000,15 +1963,6 @@ QPushButton:pressed {
           <red>253</red>
           <green>253</green>
           <blue>253</blue>
-         </color>
-        </brush>
-       </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>241</red>
-          <green>241</green>
-          <blue>241</blue>
          </color>
         </brush>
        </colorrole>
@@ -2095,15 +2049,6 @@ QPushButton:pressed {
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>0</red>
-          <green>0</green>
-          <blue>0</blue>
-         </color>
-        </brush>
-       </colorrole>
       </disabled>
      </palette>
     </property>
@@ -2178,15 +2123,6 @@ QPushButton:pressed {
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>245</red>
-          <green>245</green>
-          <blue>245</blue>
-         </color>
-        </brush>
-       </colorrole>
       </active>
       <inactive>
        <colorrole role="WindowText">
@@ -2249,15 +2185,6 @@ QPushButton:pressed {
           <red>254</red>
           <green>254</green>
           <blue>254</blue>
-         </color>
-        </brush>
-       </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>245</red>
-          <green>245</green>
-          <blue>245</blue>
          </color>
         </brush>
        </colorrole>
@@ -2326,15 +2253,6 @@ QPushButton:pressed {
          </color>
         </brush>
        </colorrole>
-       <colorrole role="PlaceholderText">
-        <brush brushstyle="SolidPattern">
-         <color alpha="128">
-          <red>0</red>
-          <green>0</green>
-          <blue>0</blue>
-         </color>
-        </brush>
-       </colorrole>
       </disabled>
      </palette>
     </property>
@@ -2347,8 +2265,6 @@ QPushButton:pressed {
    <addaction name="menuHelp"/>
   </widget>
  </widget>
- <resources>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
