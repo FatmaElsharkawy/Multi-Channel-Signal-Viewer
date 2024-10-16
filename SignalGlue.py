@@ -4,7 +4,7 @@ import pyqtgraph as pg
 from pyqtgraph.Qt import QtWidgets, QtCore
 import sys
 from pykalman import KalmanFilter  # Kalman filter implementation
-
+from ReportGenerator import ReportGenerator  # Import the ReportGenerator class from the ReportGenerator.py file
 
 class SignalGlue:
     def __init__(self, signal_x, signal_y):
@@ -48,8 +48,10 @@ class SignalGlue:
         return combined_signal
 
 
+import pyqtgraph.exporters  # For exporting the plot as an image
+
 def open_glued_signal_window(glued_signal):
-    """Open a new window to display the glued signal."""
+    """Open a new window to display the glued signal and generate a report."""
     print("Opening window to display the glued signal.")
     # Create a new window for the glued signal
     signal_window = QtWidgets.QWidget()
@@ -71,11 +73,69 @@ def open_glued_signal_window(glued_signal):
     signal_window.setWindowTitle("Glued Signal Window")
     signal_window.resize(800, 600)
 
-    # IMPORTANT: Keep a reference to the window to avoid garbage collection
-    app.signal_window = signal_window  # Keep reference here
+    # Keep a reference to avoid garbage collection
+    app.signal_window = signal_window
 
-    signal_window.show()  # Display the window
+    # ---- Create Buttons ----
+    # Button to generate the report
+    generate_report_button = QtWidgets.QPushButton("Generate Report")
+    signal_layout.addWidget(generate_report_button)
+
+    # Button to add another image to the report
+    add_image_button = QtWidgets.QPushButton("Add Another Image")
+    #signal_layout.addWidget(add_image_button)
+
+    # Create an instance of the ReportGenerator class outside the functions
+    report_gen = ReportGenerator()
+
+    # ---- Report Generation Logic ----
+    def generate_report():
+        try:
+            # Calculate statistics on the glued signal
+            report_gen.calculate_statistics(glued_signal)
+
+            # Save a snapshot of the plot as an image
+            exporter = pg.exporters.ImageExporter(plot_glued.plotItem)
+            exporter.export('glued_signal.png')  # Save the initial image
+
+            # Add the snapshot to the report
+            report_gen.add_snapshot("glued_signal.png")
+
+            # Generate the PDF report
+            report_gen.generate_report("signal_report.pdf")
+            print("Report generated successfully: signal_report.pdf")
+
+        except Exception as e:
+            print(f"Error generating report: {e}")
+
+    # Connect the generate report button to the function
+    generate_report_button.clicked.connect(generate_report)
+
+    # ---- Add Another Image Logic ----
+    def add_another_image():
+        try:
+            # Save a new screenshot of the current plot
+            new_image_file = 'glued_signal_additional.png'
+            exporter = pg.exporters.ImageExporter(plot_glued.plotItem)
+            exporter.export(new_image_file)  # Save the current image
+
+            # Add the newly saved image to the report
+            report_gen.add_snapshot(new_image_file)
+            print(f"Added additional image to report: {new_image_file}")
+
+        except Exception as e:
+            print(f"Error adding image to report: {e}")
+
+    # Connect the add image button to the function
+    add_image_button.clicked.connect(add_another_image)
+
+    # Show the window
+    signal_window.show()
+
     return signal_window
+
+
+
 
 
 
