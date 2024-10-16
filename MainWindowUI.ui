@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1504</width>
-    <height>1116</height>
+    <height>1179</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,19 +139,14 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>64</number>
+      <number>68</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>73</number>
+      <number>75</number>
      </attribute>
-     <row>
-      <property name="text">
-       <string>1</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>Signal</string>
@@ -172,38 +167,6 @@ QPushButton:pressed {
        <string>Visibility</string>
       </property>
      </column>
-     <item row="0" column="0">
-      <property name="text">
-       <string>1st signal</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="1">
-      <property name="text">
-       <string>ghraph1</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="3">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="checkState">
-       <enum>Checked</enum>
-      </property>
-     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="graph_two_channals" native="true">
@@ -315,19 +278,14 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>64</number>
+      <number>68</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>73</number>
+      <number>75</number>
      </attribute>
-     <row>
-      <property name="text">
-       <string>1</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>Signal</string>
@@ -348,38 +306,6 @@ QPushButton:pressed {
        <string>Visibility</string>
       </property>
      </column>
-     <item row="0" column="0">
-      <property name="text">
-       <string>1st signal</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="1">
-      <property name="text">
-       <string>ghraph1</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="3">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="checkState">
-       <enum>Checked</enum>
-      </property>
-     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="tools" native="true">
@@ -932,6 +858,99 @@ QRadioButton:pressed {
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="pause_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>810</y>
+       <width>201</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 16px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>nonrectangular</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="real_time">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>740</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;try to glue signals!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 14px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>real-time</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Graph1_widget" native="true">
     <property name="geometry">
@@ -957,7 +976,7 @@ QRadioButton:pressed {
       <rect>
        <x>50</x>
        <y>430</y>
-       <width>801</width>
+       <width>851</width>
        <height>22</height>
       </rect>
      </property>
@@ -1006,9 +1025,9 @@ QSlider::add-page:horizontal {
      <property name="geometry">
       <rect>
        <x>880</x>
-       <y>70</y>
+       <y>40</y>
        <width>22</width>
-       <height>331</height>
+       <height>361</height>
       </rect>
      </property>
      <property name="cursor">
@@ -1066,7 +1085,7 @@ QSlider::add-page:vertical {
     <widget class="QPushButton" name="snapshot_G1">
      <property name="geometry">
       <rect>
-       <x>860</x>
+       <x>830</x>
        <y>10</y>
        <width>51</width>
        <height>51</height>
@@ -1152,8 +1171,8 @@ QPushButton:pressed {
     <widget class="QSlider" name="graph2_Vslider">
      <property name="geometry">
       <rect>
-       <x>880</x>
-       <y>70</y>
+       <x>890</x>
+       <y>60</y>
        <width>22</width>
        <height>341</height>
       </rect>
@@ -1213,9 +1232,9 @@ QSlider::add-page:vertical {
     <widget class="QSlider" name="graph2_Hslider">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>40</x>
        <y>440</y>
-       <width>801</width>
+       <width>851</width>
        <height>22</height>
       </rect>
      </property>
@@ -1263,7 +1282,7 @@ QSlider::add-page:horizontal {
     <widget class="QPushButton" name="snapshot_G2">
      <property name="geometry">
       <rect>
-       <x>860</x>
+       <x>840</x>
        <y>10</y>
        <width>51</width>
        <height>51</height>
