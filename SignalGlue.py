@@ -50,6 +50,7 @@ class SignalGlue:
 
 def open_glued_signal_window(glued_signal):
     """Open a new window to display the glued signal."""
+    print("Opening window to display the glued signal.")
     # Create a new window for the glued signal
     signal_window = QtWidgets.QWidget()
     signal_layout = QtWidgets.QVBoxLayout()
@@ -69,7 +70,12 @@ def open_glued_signal_window(glued_signal):
     signal_window.setLayout(signal_layout)
     signal_window.setWindowTitle("Glued Signal Window")
     signal_window.resize(800, 600)
-    signal_window.show()
+
+    # IMPORTANT: Keep a reference to the window to avoid garbage collection
+    app.signal_window = signal_window  # Keep reference here
+
+    signal_window.show()  # Display the window
+    return signal_window
 
 
 
