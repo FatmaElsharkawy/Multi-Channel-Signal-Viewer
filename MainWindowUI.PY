@@ -2,7 +2,6 @@
 from SignalViewerApp import SignalViewerApp
 from Signal import Signal
 from Graph import Graph
-import paho.mqtt.client as mqtt
 from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton, QWidget, QSlider, QRadioButton, QComboBox, QTableWidget, QTableWidgetItem, QCheckBox,QMenu
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QTableWidgetItem, QCheckBox
@@ -16,6 +15,18 @@ from PyQt5.QtWidgets import QColorDialog, QPushButton, QMainWindow
 from PyQt5.QtGui import QColor,QBrush
 from SignalGlue import SignalGlue
 
+class GluedWindow(QMainWindow):
+    def __init__(self):
+        super(GluedWindow, self).__init__()
+        loadUi('GluedUI.ui', self)  # Load the glued UI file
+        self.setWindowTitle("Glued Window")
+
+class NonRictangularWindow(QMainWindow):
+    def __init__(self):
+        super(NonRictangularWindow, self).__init__()
+        loadUi('NonRectangularUI.ui', self)  # Load the glued UI file
+        self.setWindowTitle("Non-rectangular Window")
+
 class MainWindowUI(QMainWindow):
     def __init__(self):
         super(MainWindowUI, self).__init__()
@@ -28,7 +39,7 @@ class MainWindowUI(QMainWindow):
         self.signal1= None
         self.signal2= None
         self.upload_file_1.clicked.connect(self.show_signal_graph1)
-        self.upload_file_2.clicked.connect(self.show_signal_graph2)        
+        self.upload_file_2.clicked.connect(self.show_signal_graph2)
         self.glue_button = self.findChild(QPushButton, "glue")
         self.glue_button.clicked.connect(self.open_glue_window)
         
@@ -42,36 +53,10 @@ class MainWindowUI(QMainWindow):
 
         self.linked= self.findChild(QCheckBox, "linked_chechbox")
         self.linked.clicked.connect(self.link_graphs) #it's called each time the button is clicked (checked or unchecked)
-
-        self.horizontal_scrollbar = self.findChild(QSlider, "graph1_Hslider")
-        # self.horizontal_scrollbar.valueChanged.connect(self.zoom)
         
-       
-
-        # Other initializations ...
-
-    
-        #print(data_x)
-        #self.color_push_button = self.findChild(QPushButton, "color")
-        #self.color_push_button.clicked.connect(self.signal_params.change_color)
-
-
-    
-
         self.horizontal_scrollbar_1 = self.findChild(QSlider, "graph1_Hslider")
-
         self.horizontal_scrollbar_2 = self.findChild(QSlider, "graph2_Hslider")    
-        
-        # self.horizontal_scrollbar.valueChanged.connect(self.graph1.scroll_horizontal_effect)
-        # self.horizontal_scrollbar.setRange(0,int(len(data_x) - self.graph.window_size_x))
-        # print(f"Setting scrollbar range: 0 to {len(data_x) - self.graph.window_size_x}")
-        # # self.horizontal_scrollbar.setMaximum(10)
-        # self.horizontal_scrollbar.valueChanged.connect(self.graph.scroll_horizontal)
-        # self.graph.frame_changed.connect(self.update_scrollbar)
-
-        
-
-         # Connect slider to speed functionality
+  
         self.pause = self.findChild(QPushButton, "pause")
         self.play = self.findChild(QPushButton, "play")
         self.rewind = self.findChild(QRadioButton, "rewind")
@@ -81,14 +66,16 @@ class MainWindowUI(QMainWindow):
         self.speed.setMinimum(1)  # Set minimum zoom value
         self.speed.setMaximum(50)  # Set maximum zoom value
         self.speed.setValue(25)  # Set initial zoom value
-         
-
 
         self.pause.clicked.connect(self.pause_signal)
         self.play.clicked.connect(self.resume_signal)
         self.rewind.clicked.connect(self.rewind_signal)
         self.zoom.valueChanged.connect(self.set_zoom_value)  
         self.speed.valueChanged.connect(self.set_speed_value)  # Connect slider value change to update_zoom method
+
+        self.signal= Signal(graph_num=1)
+        self.graph1 = Graph(self.graph_widget_1, signal_x= self.signal.signal_data_time, signal_y= self.signal.signal_data_amplitude, is_linked=False, title="Graph 1", signal =self.signal, graph_num=1, horizontal_scrollbar=self.horizontal_scrollbar_1)
+        self.graph1.visualize_graph()  
 
 
     def create_context_menu(self, position):
@@ -155,7 +142,6 @@ class MainWindowUI(QMainWindow):
             
             if selected_color.isValid():  # Check if a valid color was selected
                 color_name = selected_color.name()  # Get the color name (e.g., #ff0000)
-
                 # Update the color in the signal
                 if table == self.table1 and self.graph1 is not None:
                     self.graph1.set_signal_color(signal_num,color_name)  # Update signal's color attribute
@@ -170,39 +156,10 @@ class MainWindowUI(QMainWindow):
                 print("Color changed to:", color_name)
 
 
-       
-        
-
-    # def scroll_horizontal(self, value):
-    #     if self.graph_selected.currentText() == 'Graph1':
-    #         self.graph1.scroll_horizontal_affect(value)
-    #     elif self.graph_selected.currentText() == 'Graph2':
-    #         self.graph2.scroll_horizontal_affect(value)
-
-
     def contextMenuEvent(self, event):
         self.create_context_menu(event.pos())
 
-
-    # def scroll_horizontal(self, value):
-    #     signal_file_path,  = self.signal_app.browse_signals()
-    #     self.signal= Signal(1, csv_path= signal_file_path)
-    #     data_x= self.signal.signal_data_time
-
-
-    #     self.horizontal_scrollbar.setMaximum(data_x[-1])
-        
-
    
-
-        
-
-    
-       
-
-       
-       
-        
 
     def open_glue_window(self):
         # Create an instance of the SignalGlue window and show it
@@ -212,16 +169,12 @@ class MainWindowUI(QMainWindow):
 
     def show_signal_graph1(self):
         signal_file_path,  = self.signal_app.browse_signals()
-        self.signal1= Signal(1, csv_path= signal_file_path)
-        self.add_row(self.signal1, 1)
-        data_x= self.signal1.signal_data_time
-        data_y= self.signal1.signal_data_amplitude
-        if self.graph1 is None:
-            self.graph1 = Graph(self.graph_widget_1, signal_x= data_x, signal_y=data_y,title="Graph 1", graph_num=1, is_linked=False, signal =self.signal1,horizontal_scrollbar=self.horizontal_scrollbar_1)
-            self.graph1.visualize_graph()
-        else: #graph exits, signal will be added only
-            self.graph1.add_signal(data_x, data_y, self.signal1)
-
+        self.signal= Signal(1, csv_path= signal_file_path)
+        self.add_row(self.signal, 1)
+        data_x= self.signal.signal_data_time
+        data_y= self.signal.signal_data_amplitude
+        if self.graph1 is not None:
+            self.graph1.add_signal(data_x, data_y, self.signal)
 
     def show_signal_graph2(self):
         signal_file_path, = self.signal_app.browse_signals()
@@ -239,6 +192,8 @@ class MainWindowUI(QMainWindow):
     def pause_signal(self):
         if self.graph_selected.isEnabled() == False:
             self.graph1.pause_signal(self.graph2)
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.pause_signal(self.graph2)
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.pause_signal()
@@ -248,6 +203,7 @@ class MainWindowUI(QMainWindow):
     def resume_signal(self):
         if self.graph_selected.isEnabled() == False:
             self.graph1.resume_signal(self.graph2)
+    
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.resume_signal()
@@ -255,8 +211,9 @@ class MainWindowUI(QMainWindow):
             self.graph2.resume_signal()
 
     def rewind_signal(self, is_option_chosen):
-            if self.graph_selected.isEnabled() == False:
-                self.graph1.rewind_signal(is_option_chosen, self.graph2)
+        if self.graph_selected.isEnabled() == False:
+            self.graph1.rewind_signal(self.graph2)
+
             selected_value = self.graph_selected.currentText()
             if selected_value == 'Graph1':
                 self.graph1.rewind_signal(is_option_chosen)
@@ -266,6 +223,7 @@ class MainWindowUI(QMainWindow):
     def set_zoom_value(self, value):
         if self.graph_selected.isEnabled() == False:
             self.graph1.set_zoom_value(value, self.graph2) 
+   
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.set_zoom_value(value)
@@ -278,6 +236,7 @@ class MainWindowUI(QMainWindow):
     def set_speed_value(self, value):
         if self.graph_selected.isEnabled() == False:
             self.graph1.set_speed_value(value, self.graph2) 
+    
         selected_value = self.graph_selected.currentText()
         if selected_value == 'Graph1':
             self.graph1.set_speed_value(value)
@@ -295,16 +254,6 @@ class MainWindowUI(QMainWindow):
             self.table1.setItem(row_position, 0, QTableWidgetItem(f"Signal{signal.signal_num}"))
             self.table1.setItem(row_position, 1, QTableWidgetItem("Graph1"))
             self.table1.setItem(row_position, 2, QTableWidgetItem())
-
-            # graph_item = QTableWidgetItem("Graph1")
-            # graph_item.setFlags(graph_item.flags() & ~QTableWidgetItem.ItemIsEditable)  # Disable editing
-            # self.table1.setItem(row_position, 1, graph_item)
-
-            # # Create an uneditable item for the color
-            # color_item = QTableWidgetItem()  # This can be blank initially
-            # color_item.setFlags(color_item.flags() & ~QTableWidgetItem.ItemIsEditable)  # Disable editing
-            # self.table1.setItem(row_position, 2, color_item)
-
             checkbox = QCheckBox()
             checkbox.setChecked(True)  # Set checkbox in the fourth column
             checkbox.stateChanged.connect(lambda state: self.toggle_signal_visibility(row_position, state))  # Connect state change
@@ -322,7 +271,7 @@ class MainWindowUI(QMainWindow):
             checkbox.setChecked(True)
             checkbox.stateChanged.connect(lambda state: self.toggle_signal_visibility(row_position, state))  
             self.table2.setCellWidget(row_position, 3, checkbox)
-
+    
     def link_graphs(self):
         if self.linked.isChecked():
             print("graphs will be linked")
@@ -334,7 +283,7 @@ class MainWindowUI(QMainWindow):
                     border: 1px solid #A9A9A9;  /* Optional: Add a border color to match */
                 }
             """)
-        
+            self.graph1.link_graphs(self.graph2)
         else:
             self.graph_selected.setEnabled(True)
             self.graph_selected.setStyleSheet("")  # Resets to the default style
