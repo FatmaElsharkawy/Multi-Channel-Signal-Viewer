@@ -2,7 +2,6 @@
 from SignalViewerApp import SignalViewerApp
 from Signal import Signal
 from Graph import Graph
-import paho.mqtt.client as mqtt
 from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton, QWidget, QSlider, QRadioButton, QComboBox, QTableWidget, QTableWidgetItem, QCheckBox,QMenu
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QTableWidgetItem, QCheckBox
@@ -54,14 +53,8 @@ class MainWindowUI(QMainWindow):
 
         self.linked= self.findChild(QCheckBox, "linked_chechbox")
         self.linked.clicked.connect(self.link_graphs) #it's called each time the button is clicked (checked or unchecked)
-
-        self.horizontal_scrollbar = self.findChild(QSlider, "graph1_Hslider")
-    
-
-    
-
+        
         self.horizontal_scrollbar_1 = self.findChild(QSlider, "graph1_Hslider")
-
         self.horizontal_scrollbar_2 = self.findChild(QSlider, "graph2_Hslider")    
   
         self.pause = self.findChild(QPushButton, "pause")
@@ -73,8 +66,6 @@ class MainWindowUI(QMainWindow):
         self.speed.setMinimum(1)  # Set minimum zoom value
         self.speed.setMaximum(50)  # Set maximum zoom value
         self.speed.setValue(25)  # Set initial zoom value
-         
-
 
         self.pause.clicked.connect(self.pause_signal)
         self.play.clicked.connect(self.resume_signal)
@@ -82,7 +73,7 @@ class MainWindowUI(QMainWindow):
         self.zoom.valueChanged.connect(self.set_zoom_value)  
         self.speed.valueChanged.connect(self.set_speed_value)  # Connect slider value change to update_zoom method
 
-        self.signal= Signal()
+        self.signal= Signal(graph_num=1)
         self.graph1 = Graph(self.graph_widget_1, signal_x= self.signal.signal_data_time, signal_y= self.signal.signal_data_amplitude, is_linked=False, title="Graph 1", signal =self.signal, graph_num=1, horizontal_scrollbar=self.horizontal_scrollbar_1)
         self.graph1.visualize_graph()  
 
@@ -151,7 +142,6 @@ class MainWindowUI(QMainWindow):
             
             if selected_color.isValid():  # Check if a valid color was selected
                 color_name = selected_color.name()  # Get the color name (e.g., #ff0000)
-
                 # Update the color in the signal
                 if table == self.table1 and self.graph1 is not None:
                     self.graph1.set_signal_color(signal_num,color_name)  # Update signal's color attribute
@@ -166,39 +156,10 @@ class MainWindowUI(QMainWindow):
                 print("Color changed to:", color_name)
 
 
-       
-        
-
-    # def scroll_horizontal(self, value):
-    #     if self.graph_selected.currentText() == 'Graph1':
-    #         self.graph1.scroll_horizontal_affect(value)
-    #     elif self.graph_selected.currentText() == 'Graph2':
-    #         self.graph2.scroll_horizontal_affect(value)
-
-
     def contextMenuEvent(self, event):
         self.create_context_menu(event.pos())
 
-
-    # def scroll_horizontal(self, value):
-    #     signal_file_path,  = self.signal_app.browse_signals()
-    #     self.signal= Signal(1, csv_path= signal_file_path)
-    #     data_x= self.signal.signal_data_time
-
-
-    #     self.horizontal_scrollbar.setMaximum(data_x[-1])
-        
-
    
-
-        
-
-    
-       
-
-       
-       
-        
 
     def open_glue_window(self):
         # Create an instance of the SignalGlue window and show it
@@ -293,16 +254,6 @@ class MainWindowUI(QMainWindow):
             self.table1.setItem(row_position, 0, QTableWidgetItem(f"Signal{signal.signal_num}"))
             self.table1.setItem(row_position, 1, QTableWidgetItem("Graph1"))
             self.table1.setItem(row_position, 2, QTableWidgetItem())
-
-            # graph_item = QTableWidgetItem("Graph1")
-            # graph_item.setFlags(graph_item.flags() & ~QTableWidgetItem.ItemIsEditable)  # Disable editing
-            # self.table1.setItem(row_position, 1, graph_item)
-
-            # # Create an uneditable item for the color
-            # color_item = QTableWidgetItem()  # This can be blank initially
-            # color_item.setFlags(color_item.flags() & ~QTableWidgetItem.ItemIsEditable)  # Disable editing
-            # self.table1.setItem(row_position, 2, color_item)
-
             checkbox = QCheckBox()
             checkbox.setChecked(True)  # Set checkbox in the fourth column
             checkbox.stateChanged.connect(lambda state: self.toggle_signal_visibility(row_position, state))  # Connect state change
@@ -333,40 +284,6 @@ class MainWindowUI(QMainWindow):
                 }
             """)
             self.graph1.link_graphs(self.graph2)
-        else:
-            self.graph_selected.setEnabled(True)
-            self.graph_selected.setStyleSheet("")  # Resets to the default style
-
-  
-
-    def link_graphs(self):
-        if self.linked.isChecked():
-            print("graphs will be linked")
-            self.graph_selected.setEnabled(False)
-            self.graph_selected.setStyleSheet("""
-                QComboBox {
-                    background-color: #D3D3D3;  /* Light gray color to mimic disabled state */
-                    color: #A9A9A9;             /* Dark gray text to mimic disabled text */
-                    border: 1px solid #A9A9A9;  /* Optional: Add a border color to match */
-                }
-            """)
-        
-        else:
-            self.graph_selected.setEnabled(True)
-            self.graph_selected.setStyleSheet("")  # Resets to the default style
-
-    def link_graphs(self):
-        if self.linked.isChecked():
-            print("graphs will be linked")
-            self.graph_selected.setEnabled(False)
-            self.graph_selected.setStyleSheet("""
-                QComboBox {
-                    background-color: #D3D3D3;  /* Light gray color to mimic disabled state */
-                    color: #A9A9A9;             /* Dark gray text to mimic disabled text */
-                    border: 1px solid #A9A9A9;  /* Optional: Add a border color to match */
-                }
-            """)
-        
         else:
             self.graph_selected.setEnabled(True)
             self.graph_selected.setStyleSheet("")  # Resets to the default style

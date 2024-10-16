@@ -205,11 +205,6 @@ class Graph:
         self.canvas.draw()
         self.current_frame += 1
 
-        # if self.current_frame >= self.frames_num - self.window_size_x:
-        #     self.horizontal_scrollbar.setEnabled(False)  # Disable the scrollbar
-        # else:
-        #     self.horizontal_scrollbar.setEnabled(True) 
-        # Stop the timer when the last frame is reached
         if self.current_frame >= self.frames_num:
             if self.get_rewind():
                 self.current_frame = 0  # Reset the frame to rewind

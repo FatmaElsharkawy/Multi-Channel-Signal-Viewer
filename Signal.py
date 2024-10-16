@@ -6,13 +6,12 @@ from Graph import Graph
 
 # from SignalViewerApp import SignalViewerApp 
 
-class Signal():
+class Signal:
     signals_num_graph1, signals_num_graph2= 0,0
     row_signal_map_1= {} #row_signal_map[row]= signal
     row_signal_map_2= {} 
    
     def __init__(self, graph_num, csv_path= 'rec_1r.csv'):
-        super().__init__()
         self.csv_path = csv_path
         csvFile = pd.read_csv(self.csv_path)   
 
