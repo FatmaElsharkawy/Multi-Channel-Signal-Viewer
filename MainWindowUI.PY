@@ -21,6 +21,7 @@ from pyqtgraph.Qt import QtWidgets, QtCore
 import sys
 import matplotlib.pyplot as plt
 from matplotlib.widgets import RectangleSelector, Button
+from ReportGenerator import ReportGenerator
 
 class GluedWindow(QMainWindow):
     def __init__(self):
@@ -157,7 +158,9 @@ class MainWindowUI(QMainWindow):
         self.selection_button_g2.clicked.connect(self.activate_rectangle_graph2)
         # self.glue_button.clicked.connect(self.deactivate_both_rectangles)
         self.glue_button.clicked.connect(self.delete_last_rectangle)
-
+        #self.glue_report.clicked.connect(self.generate_report)
+        
+        
 
 
 
@@ -393,9 +396,9 @@ class MainWindowUI(QMainWindow):
 
             # Adjust the x-values of the second signal based on the gap value
             selected2_x_moved = np.array([x + gap_value for x in self.selected2_x])
-        
-            if selected2_x_moved[0]<self.selected1_x[0]:
-                if self.selected1_x[0]<selected2_x_moved[-1]:
+            
+            if selected2_x_moved[0] < self.selected1_x[0]:
+                if self.selected1_x[0] < selected2_x_moved[-1]:
                     print("1")
                     
                     y_interpolated = self.interpolate_signals(selected2_x_moved)
@@ -411,17 +414,25 @@ class MainWindowUI(QMainWindow):
                     plot_widget.plot(selected2_x_moved[0:overlap_start_index], self.selected2_y[0:overlap_start_index], pen='r', name="Signal 1")
                     plot_widget.plot(self.selected1_x[overlap_end_index:], self.selected1_y[overlap_end_index:], pen='b', name="Signal 2")
 
-                    plot_widget.plot(range(int(self.overlap_start),int(self.overlap_end)), y_interpolated, pen='g', name="interpolated")
-                
+                    plot_widget.plot(range(int(self.overlap_start), int(self.overlap_end)), y_interpolated, pen='g', name="interpolated")
+                    
+                    # Store the glued signal
+                    self.glued_signal_x = np.concatenate((selected2_x_moved[0:overlap_start_index], self.selected1_x[overlap_end_index:]))
+                    self.glued_signal_y = np.concatenate((self.selected2_y[0:overlap_start_index], self.selected1_y[overlap_end_index:]))
+
                 else:
                     print("2")
-                    self.x_gap = np.linspace(selected2_x_moved[-1], self.selected1_x[0], num=np.int16(abs(self.selected1_x[0] ) - np.int16(selected2_x_moved[-1])))
+                    self.x_gap = np.linspace(selected2_x_moved[-1], self.selected1_x[0], num=np.int16(abs(self.selected1_x[0]) - np.int16(selected2_x_moved[-1])))
                     plot_widget.plot(selected2_x_moved, self.selected2_y, pen='r', name="Signal 1")
                     plot_widget.plot(self.selected1_x, self.selected1_y, pen='b', name="Signal 2")
                     plot_widget.plot(self.x_gap, self.interpolate_signals(selected2_x_moved), pen='g', name="interpolated")
                     
+                    # Store the glued signal
+                    self.glued_signal_x = np.concatenate((selected2_x_moved, self.selected1_x))
+                    self.glued_signal_y = np.concatenate((self.selected2_y, self.selected1_y))
+
             else:
-                if selected2_x_moved[0]<self.selected1_x[-1]:
+                if selected2_x_moved[0] < self.selected1_x[-1]:
                     y_interpolated = self.interpolate_signals(selected2_x_moved)
                     print(f"overlap_start: {self.overlap_start}, overlap_end: {self.overlap_end}")
 
@@ -435,15 +446,22 @@ class MainWindowUI(QMainWindow):
                     plot_widget.plot(self.selected1_x[0:overlap_start_index], self.selected1_y[0:overlap_start_index], pen='b', name="Signal 1")
                     plot_widget.plot(selected2_x_moved[overlap_end_index:], self.selected2_y[overlap_end_index:], pen='r', name="Signal 2")
 
-                    plot_widget.plot(range(int(self.overlap_start),int(self.overlap_end)), y_interpolated, pen='g', name="interpolated")
+                    plot_widget.plot(range(int(self.overlap_start), int(self.overlap_end)), y_interpolated, pen='g', name="interpolated")
 
+                    # Store the glued signal
+                    self.glued_signal_x = np.concatenate((self.selected1_x[0:overlap_start_index], selected2_x_moved[overlap_end_index:]))
+                    self.glued_signal_y = np.concatenate((self.selected1_y[0:overlap_start_index], self.selected2_y[overlap_end_index:]))
 
                 else:
-                    self.x_gap = np.linspace(self.selected1_x[-1], selected2_x_moved[0],num=(np.int16(selected2_x_moved[0])- np.int16(self.selected1_x[-1])))
+                    self.x_gap = np.linspace(self.selected1_x[-1], selected2_x_moved[0], num=(np.int16(selected2_x_moved[0]) - np.int16(self.selected1_x[-1])))
                     plot_widget.plot(self.selected1_x, self.selected1_y, pen='b', name="Signal 1")
                     plot_widget.plot(selected2_x_moved, self.selected2_y, pen='r', name="Signal 2")
                     plot_widget.plot(self.x_gap, self.interpolate_signals(selected2_x_moved), pen='g', name="interpolated")
-                
+
+                    # Store the glued signal
+                    self.glued_signal_x = np.concatenate((self.selected1_x, selected2_x_moved))
+                    self.glued_signal_y = np.concatenate((self.selected1_y, self.selected2_y))
+
             # Plot both signals in the combined window with the adjusted gap
             # plot_widget.plot(self.selected1_x, self.selected1_y, pen='b', name="Signal 1")
             # plot_widget.plot(selected2_x_moved, self.selected2_y, pen='r', name="Signal 2")
