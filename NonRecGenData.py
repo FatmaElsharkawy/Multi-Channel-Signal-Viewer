@@ -1,58 +1,41 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from matplotlib.widgets import Button
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+from PyQt5.QtCore import QTimer
+from threading import Thread
 
-# Step 1: Initialize parameters for the radar signal
-num_targets = 100  # Number of targets
-radii = np.random.rand(num_targets) * 10  # Initial distances of targets
-angles = np.random.rand(num_targets) * 2 * np.pi  # Initial angles of targets
+class NonRectangularPlot:
+    def __init__(self):
+        self.figure = Figure()
+        self.canvas = FigureCanvas(self.figure)
+        self.ax = self.figure.add_subplot(111, projection='polar')
+        self.num_targets = 100
+        self.radii = np.random.rand(self.num_targets) * 10
+        self.angles = np.random.rand(self.num_targets) * 2 * np.pi
+        self._animating = False  # Flag to control the animation
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.plot)
 
-# Function to update target positions
-def update_positions(radii, angles):
-    # Update angles and radii to simulate movement
-    angles += np.random.uniform(-0.1, 0.1, num_targets)  # Slightly randomize angles
-    radii += np.random.uniform(-0.1, 0.1, num_targets)  # Slightly randomize radii (within bounds)
-    radii = np.clip(radii, 0, 10)  # Ensure radii stay within bounds (0 to 10)
-    return radii, angles
+    def update_positions(self):
+        self.angles += np.random.uniform(-0.1, 0.1, self.num_targets)
+        self.radii += np.random.uniform(-0.1, 0.1, self.num_targets)
+        self.radii = np.clip(self.radii, 0, 10)
+        return self.angles, self.radii
 
-# Stop flag
-stop_animation = False
+    def plot(self):
+        if not self._animating:
+            return
 
-# Stop button callback function
-def stop(event):
-    global stop_animation
-    stop_animation = True
+        self.ax.clear()
+        self.ax.set_ylim(0, 10)
+        angles, radii = self.update_positions()
+        self.ax.scatter(angles, radii, c='red', s=10)
+        self.canvas.draw_idle()
 
-# Set up the plot
-plt.ion()  # Turn on interactive mode
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-ax.set_ylim(0, 10)
+    def start(self):
+        self._animating = True
+        self.timer.start(100)  # Update every 100 ms
 
-# Add a stop button
-stop_ax = plt.axes([0.8, 0.9, 0.1, 0.05])  # Position: [left, bottom, width, height]
-stop_button = Button(stop_ax, 'Stop')
-stop_button.on_clicked(stop)
-
-# Animation loop
-for _ in range(100):  # Number of frames
-    if stop_animation:  # Check if stop button was clicked
-        break
-
-    ax.clear()  # Clear the previous frame
-    ax.set_ylim(0, 10)  # Reset limits
-
-    # Update target positions
-    radii, angles = update_positions(radii, angles)
-
-    # Plot points (targets)
-    ax.scatter(angles, radii, c='red', s=10, label="Targets")
-    plt.title("Moving Radar Signal Simulation")
-    plt.legend()
-
-    # Pause to create animation effect
-    plt.pause(0.1)  # Pause for 100 ms
-
-# Turn off interactive mode
-plt.ioff()
-plt.show()
+    def stop(self):
+        self._animating = False
+        self.timer.stop()
