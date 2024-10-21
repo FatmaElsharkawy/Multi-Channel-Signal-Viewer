@@ -2,11 +2,6 @@
 from SignalViewerApp import SignalViewerApp
 from Signal import Signal
 from Graph import Graph
-import numpy as np
-from scipy import interpolate
-import pyqtgraph as pg
-from pyqtgraph.Qt import QtWidgets, QtCore
-import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication,QPushButton, QWidget, QSlider, QRadioButton, QComboBox, QTableWidget, QTableWidgetItem, QCheckBox,QMenu
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QTableWidgetItem, QCheckBox
@@ -18,15 +13,19 @@ import numpy as np
 import icons.icons_rc
 from PyQt5.QtWidgets import QColorDialog, QPushButton, QMainWindow
 from PyQt5.QtGui import QColor,QBrush
-from test_glue import SignalGlue
+from SignalGlue import SignalGlue
+import numpy as np
+from scipy import interpolate
+import pyqtgraph as pg
+from pyqtgraph.Qt import QtWidgets, QtCore
+import sys
 import matplotlib.pyplot as plt
 from matplotlib.widgets import RectangleSelector, Button
 
 class GluedWindow(QMainWindow):
     def __init__(self):
         super(GluedWindow, self).__init__()
-        loadUi('Glue.ui', self)  # Load the glued UI file
-       
+        loadUi('GluedUI.ui', self)  # Load the glued UI file
         self.setWindowTitle("Glued Window")
 
 class NonRictangularWindow(QMainWindow):
@@ -90,8 +89,6 @@ class DraggableRectangle:
 
 
 
-
-
 class MainWindowUI(QMainWindow):
     def __init__(self):
         super(MainWindowUI, self).__init__()
@@ -105,7 +102,6 @@ class MainWindowUI(QMainWindow):
         self.signal2= None
         self.upload_file_1.clicked.connect(self.show_signal_graph1)
         self.upload_file_2.clicked.connect(self.show_signal_graph2)
-        self.gap_slider=None
         
         
         self.graph_widget_1 = self.findChild(QWidget, "Graph1_signalview")  
@@ -162,9 +158,7 @@ class MainWindowUI(QMainWindow):
         # self.glue_button.clicked.connect(self.deactivate_both_rectangles)
         self.glue_button.clicked.connect(self.delete_last_rectangle)
 
-        
 
-        
 
 
     def create_context_menu(self, position):
@@ -247,6 +241,8 @@ class MainWindowUI(QMainWindow):
 
     def contextMenuEvent(self, event):
         self.create_context_menu(event.pos())
+
+   
 
     def activate_rectangle_graph1(self):
         # Ensure the DraggableRectangle is instantiated for graph1 if not already
@@ -461,12 +457,14 @@ class MainWindowUI(QMainWindow):
 
         
 
+        
+
     def show_signal_graph1(self):
         signal_file_path,  = self.signal_app.browse_signals()
         self.signal1= Signal(1, csv_path= signal_file_path)
-        self.add_row(self.signal1, 1)
-        data_x= self.signal1.signal_data_time
-        data_y= self.signal1.signal_data_amplitude
+        self.add_row(self.signal, 1)
+        data_x= self.signal.signal_data_time
+        data_y= self.signal.signal_data_amplitude
         if self.graph1 is not None:
             self.graph1.add_signal(data_x, data_y, self.signal)
 
@@ -484,7 +482,6 @@ class MainWindowUI(QMainWindow):
 
     
     def pause_signal(self):
-        
         if self.graph_selected.isEnabled() == False:
             self.graph1.pause_signal(self.graph2)
         if self.graph_selected.isEnabled() == False:
@@ -564,7 +561,7 @@ class MainWindowUI(QMainWindow):
             self.table2.setItem(row_position, 2, QTableWidgetItem("Blue"))
             checkbox = QCheckBox()
             checkbox.setChecked(True)
-            checkbox.stateChanged.connect(lambda state: self.toggle_signal_visibility(row_position, state))
+            checkbox.stateChanged.connect(lambda state: self.toggle_signal_visibility(row_position, state))  
             self.table2.setCellWidget(row_position, 3, checkbox)
     
     def link_graphs(self):

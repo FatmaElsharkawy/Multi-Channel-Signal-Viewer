@@ -101,7 +101,6 @@ QComboBox::item:hover {
 QComboBox::item:selected {
     background-color: #1b4b61;   /* Darker blue when an item is selected */
 }
-
 </string>
     </property>
     <item>
@@ -156,8 +155,6 @@ QPushButton:hover {
 QPushButton:pressed {
     background-color: #1b4b61;    /* Darker blue when pressed */
 }
-
-
 </string>
     </property>
     <property name="text">

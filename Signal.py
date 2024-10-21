@@ -53,8 +53,7 @@ class Signal:
         self.visible= visible
 
     def set_color(self,new_color):  
-        self.color=new_color
-         
+        self.color=new_color 
     def set_label(self,new_label):  
         self.label=new_label
 
