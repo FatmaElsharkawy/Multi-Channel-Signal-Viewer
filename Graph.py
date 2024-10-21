@@ -69,17 +69,12 @@ class Graph:
     def set_signal_color(self, signal_index, color):
         """Update the color of a specific signal."""
         if 0 <= signal_index < len(self.signal_plots):
-            self.signal_plots[signal_index].set_color(color)
+            self.signal_plots[signal_index].set_color(color,signal_index)
             self.canvas.draw()
               # Redraw the canvas to reflect the new color
         else:
             print("Signal index out of range.")   
-
-    def set_signal_visibility(self, signal_index, visible):
-        """Set the visibility of a specific signal."""
-        if 0 <= signal_index < len(self.signal_plots):
-            self.signal_plots[signal_index].set_visible(visible)  # Change visibility
-            self.canvas.draw()          
+             
 
     def on_press(self, event):
         """Handles the mouse press event to start dragging/panning."""

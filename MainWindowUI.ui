@@ -763,9 +763,9 @@ QSlider::add-page:horizontal {
     <widget class="QPushButton" name="glue">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>890</y>
-       <width>151</width>
+       <x>20</x>
+       <y>750</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -861,10 +861,10 @@ QRadioButton:pressed {
     <widget class="QPushButton" name="pause_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>810</y>
-       <width>201</width>
-       <height>51</height>
+       <x>20</x>
+       <y>650</y>
+       <width>191</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="cursor">
@@ -879,7 +879,7 @@ QRadioButton:pressed {
     padding: 5px 15px;            /* Padding for better text alignment */
     
     font-family: Arial, Helvetica, sans-serif;  /* Font family */
-    font-size: 16px;              /* Font size */
+    font-size: 14px;              /* Font size */
     font-weight: bold;            /* Bold text */
     letter-spacing: 1px;          /* Spacing between letters */
     text-transform: uppercase;    /* Uppercase letters */
@@ -909,9 +909,9 @@ QPushButton:pressed {
     <widget class="QPushButton" name="real_time">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>740</y>
-       <width>151</width>
+       <x>20</x>
+       <y>700</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -949,6 +949,51 @@ QPushButton:pressed {
      </property>
      <property name="text">
       <string>real-time</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="glue_report">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>800</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;try to glue signals!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 14px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>Glue Report</string>
      </property>
     </widget>
    </widget>
@@ -1021,71 +1066,10 @@ QSlider::add-page:horizontal {
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
-    <widget class="QSlider" name="graph1_Vslider">
-     <property name="geometry">
-      <rect>
-       <x>880</x>
-       <y>40</y>
-       <width>22</width>
-       <height>361</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QSlider::groove:vertical {
-    border: 1px solid #235d79;   /* Border around the groove */
-    width: 8px;                  /* Groove width (vertical) */
-    background: #E0E0E0;         /* Groove background color */
-    border-radius: 4px;          /* Rounded groove edges */
-}
-
-QSlider::handle:vertical {
-    background-color: #235d79;   /* Handle color */
-    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
-    width: 18px;                 /* Handle width */
-    height: 18px;                /* Handle height */
-    border-radius: 9px;          /* Rounded handle */
-    margin: 0 -5px;              /* Centers the handle over the groove */
-}
-
-QSlider::handle:vertical:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering */
-}
-
-QSlider::handle:vertical:pressed {
-    background-color: #1b4b61;   /* Darker blue when pressed */
-}
-
-QSlider::sub-page:vertical {
-    background: #235d79;         /* Color of the filled area above the handle */
-    border-radius: 4px;          /* Rounded edges for the sub-page */
-}
-
-QSlider::add-page:vertical {
-    background: #E0E0E0;         /* Color of the empty area below the handle */
-    border-radius: 4px;          /* Rounded edges for the add-page */
-}
-</string>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="value">
-      <number>100</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
     <widget class="QPushButton" name="snapshot_G1">
      <property name="geometry">
       <rect>
-       <x>830</x>
+       <x>850</x>
        <y>10</y>
        <width>51</width>
        <height>51</height>
@@ -1168,67 +1152,6 @@ QPushButton:pressed {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
     </property>
-    <widget class="QSlider" name="graph2_Vslider">
-     <property name="geometry">
-      <rect>
-       <x>890</x>
-       <y>60</y>
-       <width>22</width>
-       <height>341</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QSlider::groove:vertical {
-    border: 1px solid #235d79;   /* Border around the groove */
-    width: 8px;                  /* Groove width (vertical) */
-    background: #E0E0E0;         /* Groove background color */
-    border-radius: 4px;          /* Rounded groove edges */
-}
-
-QSlider::handle:vertical {
-    background-color: #235d79;   /* Handle color */
-    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
-    width: 18px;                 /* Handle width */
-    height: 18px;                /* Handle height */
-    border-radius: 9px;          /* Rounded handle */
-    margin: 0 -5px;              /* Centers the handle over the groove */
-}
-
-QSlider::handle:vertical:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering */
-}
-
-QSlider::handle:vertical:pressed {
-    background-color: #1b4b61;   /* Darker blue when pressed */
-}
-
-QSlider::sub-page:vertical {
-    background: #235d79;         /* Color of the filled area above the handle */
-    border-radius: 4px;          /* Rounded edges for the sub-page */
-}
-
-QSlider::add-page:vertical {
-    background: #E0E0E0;         /* Color of the empty area below the handle */
-    border-radius: 4px;          /* Rounded edges for the add-page */
-}
-</string>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="value">
-      <number>100</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
     <widget class="QSlider" name="graph2_Hslider">
      <property name="geometry">
       <rect>
@@ -1282,7 +1205,7 @@ QSlider::add-page:horizontal {
     <widget class="QPushButton" name="snapshot_G2">
      <property name="geometry">
       <rect>
-       <x>840</x>
+       <x>860</x>
        <y>10</y>
        <width>51</width>
        <height>51</height>
