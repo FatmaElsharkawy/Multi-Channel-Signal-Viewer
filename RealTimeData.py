@@ -33,7 +33,6 @@ class RealTimePlot(QMainWindow):
         self.canvas = FigureCanvas(self.figure)
         layout.addWidget(self.canvas)
 
-
         self.ax = self.figure.add_subplot(111)
         self.ax.set_facecolor('black')  # Set the axis background to black
         self.ax.tick_params(axis='x', colors='white')  # X-axis tick color
