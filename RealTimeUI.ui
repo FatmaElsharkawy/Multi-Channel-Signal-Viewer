@@ -95,3 +95,101 @@ color: rgb(255, 255, 255);</string>
  </resources>
  <connections/>
 </ui>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="Real-Time">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>910</width>
+    <height>702</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #183747; /* Background color */
+ 
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="RealTime" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>901</width>
+      <height>661</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget {
+    background-color: #0f2834; /* Background color */
+    border-radius: 15px; /* Curved borders */
+    border: 2px solid #183747; /* Matching the background color */
+    min-width: 10px; /* Ensures it's square */
+    min-height: 10px; /* Ensures it's square */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
+}</string>
+    </property>
+    <widget class="QWidget" name="realtime_signal_view" native="true">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>90</y>
+       <width>831</width>
+       <height>551</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+    background-color: #0f2834; /* Background color */
+    border-radius: 15px; /* Curved borders */
+    border: 2px solid #183747; /* Matching the background color */
+    min-width: 10px; /* Ensures it's square */
+    min-height: 10px; /* Ensures it's square */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
+}</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>20</y>
+       <width>570</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 24pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Real-Time BTC-USD Price</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>910</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GlueUI</class>
@@ -39,24 +40,81 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
     </property>
-   </widget>
-   <widget class="QComboBox" name="order_combobox">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>500</y>
-      <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    background-color: #235d79;   /* Background color for the combo box */
-    border: 1px solid #1b4b61;   /* Border around the combo box */
-    border-radius: 10px;         /* Rounded corners */
-    padding: 5px 15px;           /* Padding around the text */
-    color: white;                /* Text color */
-     font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    <widget class="QPushButton" name="snapshot_glue">
+     <property name="geometry">
+      <rect>
+       <x>1060</x>
+       <y>10</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TAKE A SNAPSHOT&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    
+    border-radius: 3px;       
+    border: none;         
+    color: white;               
+
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <disabledon>:/icons/icons8-screenshot-50.png</disabledon>
+      </iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>50</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="interpolate">
+     <property name="geometry">
+      <rect>
+       <x>950</x>
+       <y>300</y>
+       <width>151</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;MAKE&lt;/span&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;INTERPOLATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;MAKE AN INTERPOLATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
     font-size: 16px;              /* Font size */
     font-weight: bold;            /* Bold text */
     letter-spacing: 1px;          /* Spacing between letters */
@@ -81,26 +139,11 @@ QComboBox::drop-down {
     border-bottom-right-radius: 10px; /* Rounded bottom right */
 }
 
-QComboBox::down-arrow {
-    width: 10px;                 /* Size of the arrow */
-    height: 10px;                /* Size of the arrow */
-    image: none;                 /* Use default arrow */
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
 }
 
-QComboBox QAbstractItemView {
-    background-color: #E0E0E0;   /* Background color for the list */
-    border: 1px solid #235d79;   /* Border for the list */
-    selection-background-color: #235d79; /* Selection color when an item is highlighted */
-    color: black;                /* Text color for the items */
-}
 
-QComboBox::item:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering over an item */
-}
-
-QComboBox::item:selected {
-    background-color: #1b4b61;   /* Darker blue when an item is selected */
-}
 </string>
     </property>
     <item>
@@ -110,6 +153,11 @@ QComboBox::item:selected {
     </item>
     <item>
      <property name="text">
+      <string>linear</string>
+     </property>
+    </item>
+    <item>
+         <property name="text">
       <string>quadratic</string>
      </property>
     </item>
@@ -117,19 +165,85 @@ QComboBox::item:selected {
      <property name="text">
       <string>cubic</string>
      </property>
-    </item>
-   </widget>
-   <widget class="QPushButton" name="snapshot_pushbutton">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>500</y>
-      <width>181</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
+    </widget>
+    <widget class="QWidget" name="Glue_widget_signalview" native="true">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>901</width>
+       <height>671</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+    background-color: #0f2834; /* Background color */
+    border-radius: 15px; /* Curved borders */
+    border: 2px solid #183747; /* Matching the background color */
+    min-width: 10px; /* Ensures it's square */
+    min-height: 10px; /* Ensures it's square */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
+}</string>
+     </property>
+     <widget class="QPushButton" name="snapshot_G1_2">
+      <property name="geometry">
+       <rect>
+        <x>1040</x>
+        <y>10</y>
+        <width>51</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #235d79;    
+    border-radius: 3px;       
+    border: none;         
+    color: white;               
+
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <disabledon>../snapshot.png</disabledon>
+       </iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="play_2">
+      <property name="geometry">
+       <rect>
+        <x>940</x>
+        <y>630</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QPushButton {
     background-color: #235d79;    /* Blue color */
     border-radius: 10px;          /* Rounded corners */
     border: none;                 /* No border */
@@ -223,3 +337,4 @@ QSlider::add-page:horizontal {
  <resources/>
  <connections/>
 </ui>
+>>>>>>> b545d4d53c9fa936f1f079a0160ad9e1ba3eb62a

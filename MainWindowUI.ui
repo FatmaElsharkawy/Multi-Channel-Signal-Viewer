@@ -8,6 +8,7 @@
     <y>0</y>
     <width>1504</width>
     <height>1179</height>
+    <height>1179</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,6 +140,7 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
       <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
@@ -276,6 +278,7 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
       <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
