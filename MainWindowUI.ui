@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1504</width>
-    <height>1116</height>
+    <height>1179</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,7 +106,7 @@ QPushButton:pressed {
       <rect>
        <x>0</x>
        <y>10</y>
-       <width>291</width>
+       <width>273</width>
        <height>141</height>
       </rect>
      </property>
@@ -139,19 +139,17 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>64</number>
+      <number>82</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>44</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>73</number>
+      <number>82</number>
      </attribute>
-     <row>
-      <property name="text">
-       <string>1</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>Signal</string>
@@ -167,43 +165,6 @@ QPushButton:pressed {
        <string>Color</string>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>Visibility</string>
-      </property>
-     </column>
-     <item row="0" column="0">
-      <property name="text">
-       <string>1st signal</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="1">
-      <property name="text">
-       <string>ghraph1</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="3">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="checkState">
-       <enum>Checked</enum>
-      </property>
-     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="graph_two_channals" native="true">
@@ -315,19 +276,14 @@ QPushButton:pressed {
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>64</number>
+      <number>82</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>73</number>
+      <number>84</number>
      </attribute>
-     <row>
-      <property name="text">
-       <string>1</string>
-      </property>
-     </row>
      <column>
       <property name="text">
        <string>Signal</string>
@@ -343,43 +299,6 @@ QPushButton:pressed {
        <string>Color</string>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>Visibility</string>
-      </property>
-     </column>
-     <item row="0" column="0">
-      <property name="text">
-       <string>1st signal</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="1">
-      <property name="text">
-       <string>ghraph1</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </item>
-     <item row="0" column="3">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="checkState">
-       <enum>Checked</enum>
-      </property>
-     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="tools" native="true">
@@ -390,6 +309,9 @@ QPushButton:pressed {
       <width>221</width>
       <height>961</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QWidget {
@@ -508,7 +430,7 @@ QComboBox::item:selected {
       <rect>
        <x>30</x>
        <y>260</y>
-       <width>151</width>
+       <width>161</width>
        <height>41</height>
       </rect>
      </property>
@@ -561,7 +483,7 @@ QPushButton:pressed {
       <rect>
        <x>30</x>
        <y>210</y>
-       <width>151</width>
+       <width>161</width>
        <height>41</height>
       </rect>
      </property>
@@ -614,7 +536,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>430</y>
+       <y>450</y>
        <width>81</width>
        <height>20</height>
       </rect>
@@ -640,7 +562,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>520</y>
+       <y>530</y>
        <width>81</width>
        <height>16</height>
       </rect>
@@ -719,8 +641,8 @@ QCheckBox:hover {
     <widget class="QSlider" name="zoom">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>460</y>
+       <x>30</x>
+       <y>470</y>
        <width>160</width>
        <height>22</height>
       </rect>
@@ -778,7 +700,7 @@ QSlider::add-page:horizontal {
     <widget class="QSlider" name="speed">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>30</x>
        <y>550</y>
        <width>160</width>
        <height>22</height>
@@ -837,9 +759,9 @@ QSlider::add-page:horizontal {
     <widget class="QPushButton" name="glue">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>890</y>
-       <width>151</width>
+       <x>20</x>
+       <y>770</y>
+       <width>191</width>
        <height>41</height>
       </rect>
      </property>
@@ -884,7 +806,7 @@ QPushButton:pressed {
       <rect>
        <x>30</x>
        <y>310</y>
-       <width>151</width>
+       <width>161</width>
        <height>41</height>
       </rect>
      </property>
@@ -932,6 +854,193 @@ QRadioButton:pressed {
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="pause_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>720</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 14px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>non-rectangular</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="real_time">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>670</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;try to glue signals!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 14px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>real-time</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="replay">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>360</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 16px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>replay</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="glue_report">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>820</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;try to glue signals!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #235d79;    /* Blue color */
+    border-radius: 10px;          /* Rounded corners */
+    border: none;                 /* No border */
+    color: white;                 /* Text color */
+    padding: 5px 15px;            /* Padding for better text alignment */
+    
+    font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 14px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
+}
+
+QPushButton:hover {
+    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+}
+
+QPushButton:pressed {
+    background-color: #1b4b61;    /* Darker blue when pressed */
+}
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>Glue Report</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Graph1_widget" native="true">
     <property name="geometry">
@@ -952,122 +1061,31 @@ QRadioButton:pressed {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
     </property>
-    <widget class="QSlider" name="graph1_Hslider">
+    <widget class="QWidget" name="Graph1_signalview" native="true">
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>430</y>
-       <width>801</width>
-       <height>22</height>
+       <y>30</y>
+       <width>851</width>
+       <height>381</height>
       </rect>
      </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
      <property name="styleSheet">
-      <string notr="true">QSlider::groove:horizontal {
-    border: 1px solid #235d79;   /* Border around the groove */
-    height: 8px;                 /* Groove height */
-    background: #E0E0E0;         /* Groove background color */
-    border-radius: 4px;          /* Rounded groove edges */
-}
-
-QSlider::handle:horizontal {
-    background-color: #235d79;   /* Handle color */
-    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
-    width: 18px;                 /* Handle width */
-    height: 18px;                /* Handle height */
-    border-radius: 9px;          /* Rounded handle */
-    margin: -5px 0;              /* Centers the handle over the groove */
-}
-
-QSlider::handle:horizontal:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering */
-}
-
-QSlider::handle:horizontal:pressed {
-    background-color: #1b4b61;   /* Darker blue when pressed */
-}
-
-QSlider::sub-page:horizontal {
-    background: #235d79;         /* Color of the filled area before the handle */
-    border-radius: 4px;          /* Rounded edges for the sub-page */
-}
-
-QSlider::add-page:horizontal {
-    background: #E0E0E0;         /* Color of the empty
+      <string notr="true">QWidget {
+    background-color: #0f2834; /* Background color */
+    border-radius: 15px; /* Curved borders */
+    border: 2px solid #183747; /* Matching the background color */
+    min-width: 10px; /* Ensures it's square */
+    min-height: 10px; /* Ensures it's square */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="graph1_Vslider">
-     <property name="geometry">
-      <rect>
-       <x>880</x>
-       <y>70</y>
-       <width>22</width>
-       <height>331</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QSlider::groove:vertical {
-    border: 1px solid #235d79;   /* Border around the groove */
-    width: 8px;                  /* Groove width (vertical) */
-    background: #E0E0E0;         /* Groove background color */
-    border-radius: 4px;          /* Rounded groove edges */
-}
-
-QSlider::handle:vertical {
-    background-color: #235d79;   /* Handle color */
-    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
-    width: 18px;                 /* Handle width */
-    height: 18px;                /* Handle height */
-    border-radius: 9px;          /* Rounded handle */
-    margin: 0 -5px;              /* Centers the handle over the groove */
-}
-
-QSlider::handle:vertical:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering */
-}
-
-QSlider::handle:vertical:pressed {
-    background-color: #1b4b61;   /* Darker blue when pressed */
-}
-
-QSlider::sub-page:vertical {
-    background: #235d79;         /* Color of the filled area above the handle */
-    border-radius: 4px;          /* Rounded edges for the sub-page */
-}
-
-QSlider::add-page:vertical {
-    background: #E0E0E0;         /* Color of the empty area below the handle */
-    border-radius: 4px;          /* Rounded edges for the add-page */
-}
-</string>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="value">
-      <number>100</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
      </property>
     </widget>
     <widget class="QPushButton" name="snapshot_G1">
      <property name="geometry">
       <rect>
-       <x>860</x>
-       <y>10</y>
+       <x>870</x>
+       <y>0</y>
        <width>51</width>
        <height>51</height>
       </rect>
@@ -1108,26 +1126,6 @@ QPushButton:pressed {
        <width>50</width>
        <height>50</height>
       </size>
-     </property>
-    </widget>
-    <widget class="QWidget" name="Graph1_signalview" native="true">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>70</y>
-       <width>801</width>
-       <height>341</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QWidget {
-    background-color: #0f2834; /* Background color */
-    border-radius: 15px; /* Curved borders */
-    border: 2px solid #183747; /* Matching the background color */
-    min-width: 10px; /* Ensures it's square */
-    min-height: 10px; /* Ensures it's square */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
-}</string>
      </property>
     </widget>
    </widget>
@@ -1149,122 +1147,31 @@ QPushButton:pressed {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
     </property>
-    <widget class="QSlider" name="graph2_Vslider">
-     <property name="geometry">
-      <rect>
-       <x>880</x>
-       <y>70</y>
-       <width>22</width>
-       <height>341</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QSlider::groove:vertical {
-    border: 1px solid #235d79;   /* Border around the groove */
-    width: 8px;                  /* Groove width (vertical) */
-    background: #E0E0E0;         /* Groove background color */
-    border-radius: 4px;          /* Rounded groove edges */
-}
-
-QSlider::handle:vertical {
-    background-color: #235d79;   /* Handle color */
-    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
-    width: 18px;                 /* Handle width */
-    height: 18px;                /* Handle height */
-    border-radius: 9px;          /* Rounded handle */
-    margin: 0 -5px;              /* Centers the handle over the groove */
-}
-
-QSlider::handle:vertical:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering */
-}
-
-QSlider::handle:vertical:pressed {
-    background-color: #1b4b61;   /* Darker blue when pressed */
-}
-
-QSlider::sub-page:vertical {
-    background: #235d79;         /* Color of the filled area above the handle */
-    border-radius: 4px;          /* Rounded edges for the sub-page */
-}
-
-QSlider::add-page:vertical {
-    background: #E0E0E0;         /* Color of the empty area below the handle */
-    border-radius: 4px;          /* Rounded edges for the add-page */
-}
-</string>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="value">
-      <number>100</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QSlider" name="graph2_Hslider">
+    <widget class="QWidget" name="Graph2_signalview" native="true">
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>440</y>
-       <width>801</width>
-       <height>22</height>
+       <y>30</y>
+       <width>851</width>
+       <height>381</height>
       </rect>
      </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
      <property name="styleSheet">
-      <string notr="true">QSlider::groove:horizontal {
-    border: 1px solid #235d79;   /* Border around the groove */
-    height: 8px;                 /* Groove height */
-    background: #E0E0E0;         /* Groove background color */
-    border-radius: 4px;          /* Rounded groove edges */
-}
-
-QSlider::handle:horizontal {
-    background-color: #235d79;   /* Handle color */
-    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
-    width: 18px;                 /* Handle width */
-    height: 18px;                /* Handle height */
-    border-radius: 9px;          /* Rounded handle */
-    margin: -5px 0;              /* Centers the handle over the groove */
-}
-
-QSlider::handle:horizontal:hover {
-    background-color: #2e6d8e;   /* Lighter blue when hovering */
-}
-
-QSlider::handle:horizontal:pressed {
-    background-color: #1b4b61;   /* Darker blue when pressed */
-}
-
-QSlider::sub-page:horizontal {
-    background: #235d79;         /* Color of the filled area before the handle */
-    border-radius: 4px;          /* Rounded edges for the sub-page */
-}
-
-QSlider::add-page:horizontal {
-    background: #E0E0E0;         /* Color of the empty
+      <string notr="true">QWidget {
+    background-color: #0f2834; /* Background color */
+    border-radius: 15px; /* Curved borders */
+    border: 2px solid #183747; /* Matching the background color */
+    min-width: 10px; /* Ensures it's square */
+    min-height: 10px; /* Ensures it's square */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
     <widget class="QPushButton" name="snapshot_G2">
      <property name="geometry">
       <rect>
-       <x>860</x>
-       <y>10</y>
+       <x>870</x>
+       <y>0</y>
        <width>51</width>
        <height>51</height>
       </rect>
@@ -1305,26 +1212,6 @@ QPushButton:pressed {
        <width>50</width>
        <height>50</height>
       </size>
-     </property>
-    </widget>
-    <widget class="QWidget" name="Graph2_signalview" native="true">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>70</y>
-       <width>801</width>
-       <height>341</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QWidget {
-    background-color: #0f2834; /* Background color */
-    border-radius: 15px; /* Curved borders */
-    border: 2px solid #183747; /* Matching the background color */
-    min-width: 10px; /* Ensures it's square */
-    min-height: 10px; /* Ensures it's square */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
-}</string>
      </property>
     </widget>
    </widget>

@@ -39,7 +39,7 @@ class SignalViewerApp():
             QMessageBox.warning(None, "Unsupported File", "The selected file type is not supported.")
         else:
             # Proceed with further processing, e.g., load the file into memory
-            QMessageBox.information(None, "File Uploaded", f"File uploaded successfully: {self.file_path}")
+            #QMessageBox.information(None, "File Uploaded", f"File uploaded successfully: {self.file_path}")
             self.file_path_list.append(self.file_path)
             return True
             

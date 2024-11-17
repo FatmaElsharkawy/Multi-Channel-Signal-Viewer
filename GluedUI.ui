@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>GlueUI</class>
+ <widget class="QMainWindow" name="GlueUI">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1160</width>
-    <height>759</height>
+    <width>870</width>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,13 +20,13 @@
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="Glue_widget" native="true">
+   <widget class="QWidget" name="viewer" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>0</y>
-      <width>1121</width>
-      <height>721</height>
+      <x>10</x>
+      <y>20</y>
+      <width>851</width>
+      <height>451</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -39,74 +39,97 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
 }</string>
     </property>
-    <widget class="QPushButton" name="snapshot_glue">
-     <property name="geometry">
-      <rect>
-       <x>1060</x>
-       <y>10</y>
-       <width>51</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TAKE A SNAPSHOT&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: #235d79;    
-    border-radius: 3px;       
-    border: none;         
-    color: white;               
-
+   </widget>
+   <widget class="QComboBox" name="order_combobox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>500</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
+    background-color: #235d79;   /* Background color for the combo box */
+    border: 1px solid #1b4b61;   /* Border around the combo box */
+    border-radius: 10px;         /* Rounded corners */
+    padding: 5px 15px;           /* Padding around the text */
+    color: white;                /* Text color */
+     font-family: Arial, Helvetica, sans-serif;  /* Font family */
+    font-size: 16px;              /* Font size */
+    font-weight: bold;            /* Bold text */
+    letter-spacing: 1px;          /* Spacing between letters */
+    text-transform: uppercase;    /* Uppercase letters */
 }
 
-QPushButton:hover {
-    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
+QComboBox:hover {
+    background-color: #2e6d8e;   /* Lighter blue when hovering */
 }
 
-QPushButton:pressed {
-    background-color: #1b4b61;    /* Darker blue when pressed */
-}</string>
-     </property>
+QComboBox:pressed {
+    background-color: #1b4b61;   /* Darker blue when pressed */
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;                 /* Width of the drop-down button */
+    border-left: 1px solid #1b4b61; /* Border separating the drop-down arrow */
+    background-color: #235d79;   /* Same background color for drop-down */
+    border-top-right-radius: 10px; /* Rounded top right */
+    border-bottom-right-radius: 10px; /* Rounded bottom right */
+}
+
+QComboBox::down-arrow {
+    width: 10px;                 /* Size of the arrow */
+    height: 10px;                /* Size of the arrow */
+    image: none;                 /* Use default arrow */
+}
+
+QComboBox QAbstractItemView {
+    background-color: #E0E0E0;   /* Background color for the list */
+    border: 1px solid #235d79;   /* Border for the list */
+    selection-background-color: #235d79; /* Selection color when an item is highlighted */
+    color: black;                /* Text color for the items */
+}
+
+QComboBox::item:hover {
+    background-color: #2e6d8e;   /* Lighter blue when hovering over an item */
+}
+
+QComboBox::item:selected {
+    background-color: #1b4b61;   /* Darker blue when an item is selected */
+}
+</string>
+    </property>
+    <item>
      <property name="text">
-      <string/>
+      <string>linear</string>
      </property>
-     <property name="icon">
-      <iconset>
-       <disabledon>:/icons/icons8-screenshot-50.png</disabledon>
-      </iconset>
+    </item>
+    <item>
+     <property name="text">
+      <string>quadratic</string>
      </property>
-     <property name="iconSize">
-      <size>
-       <width>50</width>
-       <height>50</height>
-      </size>
+    </item>
+    <item>
+     <property name="text">
+      <string>cubic</string>
      </property>
-    </widget>
-    <widget class="QPushButton" name="interpolate">
-     <property name="geometry">
-      <rect>
-       <x>950</x>
-       <y>300</y>
-       <width>151</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;MAKE&lt;/span&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;INTERPOLATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="whatsThis">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;MAKE AN INTERPOLATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-QPushButton {
+    </item>
+   </widget>
+   <widget class="QPushButton" name="snapshot_pushbutton">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>500</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
     background-color: #235d79;    /* Blue color */
     border-radius: 10px;          /* Rounded corners */
     border: none;                 /* No border */
@@ -127,138 +150,62 @@ QPushButton:hover {
 QPushButton:pressed {
     background-color: #1b4b61;    /* Darker blue when pressed */
 }
+</string>
+    </property>
+    <property name="text">
+     <string>SnapShot</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="gap_slider">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>470</y>
+      <width>821</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #235d79;   /* Border around the groove */
+    height: 8px;                 /* Groove height */
+    background: #E0E0E0;         /* Groove background color */
+    border-radius: 4px;          /* Rounded groove edges */
+}
 
+QSlider::handle:horizontal {
+    background-color: #235d79;   /* Handle color */
+    border: 1px solid #1b4b61;   /* Border for handle (darker shade) */
+    width: 18px;                 /* Handle width */
+    height: 18px;                /* Handle height */
+    border-radius: 9px;          /* Rounded handle */
+    margin: -5px 0;              /* Centers the handle over the groove */
+}
+
+QSlider::handle:horizontal:hover {
+    background-color: #2e6d8e;   /* Lighter blue when hovering */
+}
+
+QSlider::handle:horizontal:pressed {
+    background-color: #1b4b61;   /* Darker blue when pressed */
+}
+
+/* Keep the sub-page and add-page the same color */
+QSlider::sub-page:horizontal {
+    background: #E0E0E0;         /* Same color as the groove */
+    border-radius: 4px;          /* Rounded edges for the sub-page */
+}
+
+QSlider::add-page:horizontal {
+    background: #E0E0E0;         /* Same color as the groove */
+    border-radius: 4px;          /* Rounded edges for the add-page */
+}
 
 </string>
-     </property>
-     <property name="text">
-      <string>INTERPOLATE</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QWidget" name="Glue_widget_signalview" native="true">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>901</width>
-       <height>671</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QWidget {
-    background-color: #0f2834; /* Background color */
-    border-radius: 15px; /* Curved borders */
-    border: 2px solid #183747; /* Matching the background color */
-    min-width: 10px; /* Ensures it's square */
-    min-height: 10px; /* Ensures it's square */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* 3D shadow effect */
-}</string>
-     </property>
-     <widget class="QPushButton" name="snapshot_G1_2">
-      <property name="geometry">
-       <rect>
-        <x>1040</x>
-        <y>10</y>
-        <width>51</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-    background-color: #235d79;    
-    border-radius: 3px;       
-    border: none;         
-    color: white;               
-
-}
-
-QPushButton:hover {
-    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
-}
-
-QPushButton:pressed {
-    background-color: #1b4b61;    /* Darker blue when pressed */
-}</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <disabledon>../snapshot.png</disabledon>
-       </iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>50</width>
-        <height>50</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="play_2">
-      <property name="geometry">
-       <rect>
-        <x>940</x>
-        <y>630</y>
-        <width>151</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">
-QPushButton {
-    background-color: #235d79;    /* Blue color */
-    border-radius: 10px;          /* Rounded corners */
-    border: none;                 /* No border */
-    color: white;                 /* Text color */
-    padding: 5px 15px;            /* Padding for better text alignment */
-    
-    font-family: Arial, Helvetica, sans-serif;  /* Font family */
-    font-size: 16px;              /* Font size */
-    font-weight: bold;            /* Bold text */
-    letter-spacing: 1px;          /* Spacing between letters */
-    text-transform: uppercase;    /* Uppercase letters */
-}
-
-QPushButton:hover {
-    background-color: #2e6d8e;    /* Slightly lighter blue when hovering */
-}
-
-QPushButton:pressed {
-    background-color: #1b4b61;    /* Darker blue when pressed */
-}
-
-
-</string>
-      </property>
-      <property name="text">
-       <string>Play</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <disabledon>:/icons/icons8-play-50.png</disabledon>
-       </iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>25</width>
-        <height>25</height>
-       </size>
-      </property>
-     </widget>
-    </widget>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -266,15 +213,13 @@ QPushButton:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1160</width>
-     <height>21</height>
+     <width>870</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
