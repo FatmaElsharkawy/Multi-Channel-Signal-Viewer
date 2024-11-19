@@ -48,10 +48,12 @@ Matplotlib
 Clone the repo
 ```python
 git clone https://github.com/YoussefHassanien/Signal-Viewer.git
+```
 
 Install the following libraries
 ```python
 pip install numpy scipy pyqt5 qtgraph reportlab
+```
 
 Navigate to project directory
 
