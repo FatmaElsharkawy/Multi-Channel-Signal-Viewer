@@ -2,7 +2,10 @@
 A desktop application to view signals using python and PyQT
 ## DEMO:
 
-[Download the Demo Video](DEMO.mp4)
+
+https://github.com/user-attachments/assets/ec24e819-38f9-4f47-af15-040ff51063cb
+
+
 
 ## Features:
 ### Signal File Browsing
