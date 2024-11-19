@@ -29,3 +29,33 @@ Adjustable parameters: window start, size, gap, overlap, and interpolation order
 
 ### Export & Reporting:
 Generate PDF reports with snapshots and statistical data (mean, std, min, max, and duration).
+
+## Install Dependencies:
+
+Ensure you have Python 3.7 or above installed, and then install the following libraries:
+
+PyQt5
+pyqtgraph
+ReportLab
+SciPy
+NumPy
+Matplotlib
+
+## Usage
+Clone the repo
+```python
+git clone https://github.com/YoussefHassanien/Signal-Viewer.git
+
+Install the following libraries
+```python
+pip install numpy scipy pyqt5 qtgraph reportlab
+
+Navigate to project directory
+
+Write in the command prompt run MainWindow.py
+
+
+
+
+
+
