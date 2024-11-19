@@ -1,5 +1,8 @@
 # Multi-Channel-Signal-Viewer
 A desktop application to view signals using python and PyQT
+## DEMO:
+
+[Download the Demo Video](DEMO.mp4)
 
 ## Features:
 ### Signal File Browsing
